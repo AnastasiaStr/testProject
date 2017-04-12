@@ -86,10 +86,10 @@
 				5D59E4FA1E9D3B9000499577 /* AppDelegate.swift */,
 				5D59E4FE1E9D3B9000499577 /* Main.storyboard */,
 				5D59E5111E9D46BE00499577 /* VideoTableViewCell.xib */,
+				5D59E51C1E9D48CB00499577 /* VideoTableViewCell.swift */,
 				5D59E51E1E9D490500499577 /* UITableView+Extension.swift */,
 				5D59E51F1E9D490500499577 /* ReusableView.swift */,
 				5D59E5201E9D490500499577 /* NibLoadableView.swift */,
-				5D59E51C1E9D48CB00499577 /* VideoTableViewCell.swift */,
 				5D59E4FC1E9D3B9000499577 /* ViewController.swift */,
 				5D59E50C1E9D3BEA00499577 /* SecondViewController.swift */,
 				5D59E50E1E9D3BFB00499577 /* ThirdViewController.swift */,
@@ -406,6 +406,7 @@
 				5D59E50B1E9D3B9000499577 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

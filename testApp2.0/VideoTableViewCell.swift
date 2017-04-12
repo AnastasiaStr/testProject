@@ -9,7 +9,8 @@
 import UIKit
 
 class VideoTableViewCell: UITableViewCell, NibLoadableView, ReusableView {
-
+    
+    static let hight: CGFloat = 185
 
     @IBOutlet weak var myPlayButton: UIButton!
     @IBOutlet weak var myImage: UIImageView!
@@ -17,6 +18,7 @@ class VideoTableViewCell: UITableViewCell, NibLoadableView, ReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         myPlayButton.layer.zPosition = 1
+        selectionStyle = .none
     }
     
 

@@ -22,6 +22,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         myTable.delegate = self
         myTable.dataSource = self
+        myTable.separatorInset = .zero
+        myTable.separatorStyle = .none
         
         myTable.register(VideoTableViewCell.self)
         
@@ -40,16 +42,19 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        let url = URL(string: urlArray[indexPath.row])
- 
-        cell.imageView?.af_setImage(withURL: url!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
+        
+        if let url = URL(string: urlArray[indexPath.row]) {
+            cell.myImage?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
+        }
         return cell
 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return VideoTableViewCell.hight
     }
+    
+ 
     
     func update () {
         urlArray.append("https://d1wst0behutosd.cloudfront.net/thumbnails/14832798.jpg?v1r1491836904")
