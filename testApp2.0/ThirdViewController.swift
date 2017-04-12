@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import PKHUD
 
-class ThirdViewController: UIViewController, UITextFieldDelegate {
+class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
 
     @IBOutlet weak var myUsername: UITextField!
     @IBOutlet weak var myPassword: UITextField!
     @IBOutlet weak var myButton: UIButton!
+    @IBOutlet weak var loginLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +25,10 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
 
         myUsername.delegate = self
         myPassword.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(gotUser(_:)), name: .GotUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didFailGetUser(_:)), name: .DidFailGetUser, object: nil)
+        
         
         
     }
@@ -39,23 +46,34 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func myLoginButton(_ sender: Any) {
-        let username = myUsername.text
-        let password = myPassword.text
-        if (username == "" || password == "") {
-           return
+        if let username = myUsername.text, let password = myPassword.text {
+            HUD.show(.progress)
+            DataManager.instance.login(login: username, password: password)
         }
-        
-        DoLogin(username!, password!)
-    
     }
     
     func DoLogin (_ user: String, _ psw: String) {
         let url = URL(string: "https://")
     }
+
+
+}
+
+// MARK: - Notification handlers
+extension ThirdViewController {
     
-
+    @objc fileprivate func gotUser(_ notification: Notification) {
+        HUD.hide()
+        if let user = DataManager.instance.currentUser {
+            loginLabel.text = "Вы нежно вошли как \(user.login)"
+        }
+        
+    }
     
-
-
-
+    @objc fileprivate func didFailGetUser(_ notification: Notification) {
+        HUD.hide()
+        //Я тут потом допишу разные ошибки при логине
+        showMessage(title: nil, message: "Ошибка")
+    }
+    
 }

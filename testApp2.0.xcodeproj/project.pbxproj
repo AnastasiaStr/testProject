@@ -20,6 +20,10 @@
 		5D59E5221E9D490500499577 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D59E51F1E9D490500499577 /* ReusableView.swift */; };
 		5D59E5231E9D490500499577 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D59E5201E9D490500499577 /* NibLoadableView.swift */; };
 		81279EB3EA2C373B48C447F2 /* Pods_testApp2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062ED324036FC1E900FBF802 /* Pods_testApp2_0.framework */; };
+		C85911F11E9EBAEB0099F4E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F01E9EBAEB0099F4E2 /* User.swift */; };
+		C85911F31E9EBCC20099F4E2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F21E9EBCC20099F4E2 /* DataManager.swift */; };
+		C85911F61E9EBD6F0099F4E2 /* Notofications+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */; };
+		C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F81E9EC26E0099F4E2 /* Alertable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		5D59E5201E9D490500499577 /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		811A4F3EC05CD1B2F2F4183F /* Pods-testApp2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp2.0/Pods-testApp2.0.release.xcconfig"; sourceTree = "<group>"; };
 		C172646C838EC91EBE95D205 /* Pods-testApp2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp2.0/Pods-testApp2.0.debug.xcconfig"; sourceTree = "<group>"; };
+		C85911F01E9EBAEB0099F4E2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/Entities/User.swift; sourceTree = "<group>"; };
+		C85911F21E9EBCC20099F4E2 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Notofications+Extension.swift"; path = "Extensions/Notofications+Extension.swift"; sourceTree = "<group>"; };
+		C85911F81E9EC26E0099F4E2 /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alertable.swift; path = Protocols/Alertable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +91,9 @@
 		5D59E4F91E9D3B9000499577 /* testApp2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				C85911F71E9EC25E0099F4E2 /* Protocols */,
+				C85911F41E9EBD5C0099F4E2 /* Extensions */,
+				C85911EE1E9EBACD0099F4E2 /* Model */,
 				5D59E4FA1E9D3B9000499577 /* AppDelegate.swift */,
 				5D59E4FE1E9D3B9000499577 /* Main.storyboard */,
 				5D59E5111E9D46BE00499577 /* VideoTableViewCell.xib */,
@@ -107,6 +118,39 @@
 				811A4F3EC05CD1B2F2F4183F /* Pods-testApp2.0.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C85911EE1E9EBACD0099F4E2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C85911EF1E9EBAD50099F4E2 /* Entities */,
+				C85911F21E9EBCC20099F4E2 /* DataManager.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C85911EF1E9EBAD50099F4E2 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				C85911F01E9EBAEB0099F4E2 /* User.swift */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		C85911F41E9EBD5C0099F4E2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		C85911F71E9EC25E0099F4E2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C85911F81E9EC26E0099F4E2 /* Alertable.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,10 +278,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D59E5231E9D490500499577 /* NibLoadableView.swift in Sources */,
+				C85911F31E9EBCC20099F4E2 /* DataManager.swift in Sources */,
 				5D59E50D1E9D3BEA00499577 /* SecondViewController.swift in Sources */,
+				C85911F61E9EBD6F0099F4E2 /* Notofications+Extension.swift in Sources */,
 				5D59E51D1E9D48CB00499577 /* VideoTableViewCell.swift in Sources */,
 				5D59E4FD1E9D3B9000499577 /* ViewController.swift in Sources */,
+				C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */,
 				5D59E50F1E9D3BFB00499577 /* ThirdViewController.swift in Sources */,
+				C85911F11E9EBAEB0099F4E2 /* User.swift in Sources */,
 				5D59E4FB1E9D3B9000499577 /* AppDelegate.swift in Sources */,
 				5D59E5221E9D490500499577 /* ReusableView.swift in Sources */,
 				5D59E5211E9D490500499577 /* UITableView+Extension.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gQk-il-jah">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="gQk-il-jah">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -59,16 +59,27 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uni-0g-GVN">
+                                <rect key="frame" x="40" y="70" width="295" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QOI-7c-p2h" firstAttribute="leading" secondItem="y3T-KA-mo1" secondAttribute="leadingMargin" constant="30" id="Gjx-XK-O34"/>
+                            <constraint firstItem="QOI-7c-p2h" firstAttribute="top" secondItem="uni-0g-GVN" secondAttribute="bottom" constant="100" id="HtW-jT-vaO"/>
+                            <constraint firstAttribute="trailing" secondItem="uni-0g-GVN" secondAttribute="trailing" constant="40" id="I80-zG-HQX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QOI-7c-p2h" secondAttribute="trailing" constant="30" id="Rir-eq-uNm"/>
+                            <constraint firstItem="uni-0g-GVN" firstAttribute="top" secondItem="Ej2-7O-2ne" secondAttribute="bottom" constant="50" id="f6n-a3-tV1"/>
+                            <constraint firstItem="uni-0g-GVN" firstAttribute="leading" secondItem="y3T-KA-mo1" secondAttribute="leading" constant="40" id="g65-RO-hBn"/>
                             <constraint firstItem="QOI-7c-p2h" firstAttribute="top" secondItem="Ej2-7O-2ne" secondAttribute="bottom" constant="184" id="vzP-u6-AZ4"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Feed" image="feed_image" id="LnP-Ar-lex"/>
                     <connections>
+                        <outlet property="loginLabel" destination="uni-0g-GVN" id="pEg-T0-0P4"/>
                         <outlet property="myButton" destination="75x-xC-COb" id="qiG-Er-Nty"/>
                         <outlet property="myPassword" destination="Me9-Kn-4mO" id="wEf-DH-xZd"/>
                         <outlet property="myUsername" destination="lWw-f4-fkx" id="BFG-5Y-n8Z"/>
