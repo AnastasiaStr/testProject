@@ -24,6 +24,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myTable.dataSource = self
         myTable.separatorInset = .zero
         myTable.separatorStyle = .none
+ 
         
         myTable.register(VideoTableViewCell.self)
         

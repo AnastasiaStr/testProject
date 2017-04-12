@@ -16,21 +16,44 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        myButton.layer.cornerRadius = 10
-        //myButton.layer.frame = 4
+        myButton.layer.cornerRadius = 6
+        myUsername.layer.cornerRadius = 6
+        myPassword.layer.cornerRadius = 6
 
-        //myUsername.delegate = self
-        //myPassword.delegate = self
+        myUsername.delegate = self
+        myPassword.delegate = self
+        
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Hide the keyboard.
+        myUsername.resignFirstResponder()
+        myPassword.resignFirstResponder()
+        return true
+    }
+
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+
     }
     
     @IBAction func myLoginButton(_ sender: Any) {
-        
-        
         let username = myUsername.text
         let password = myPassword.text
-        print(username, password)
+        if (username == "" || password == "") {
+           return
+        }
         
+        DoLogin(username!, password!)
+    
     }
+    
+    func DoLogin (_ user: String, _ psw: String) {
+        let url = URL(string: "https://")
+    }
+    
+
     
 
 
