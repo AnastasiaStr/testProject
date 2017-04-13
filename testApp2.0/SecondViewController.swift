@@ -29,9 +29,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myTable.register(VideoTableViewCell.self)
         
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refresher.attributedTitle = NSAttributedString(string: "")
         refresher.addTarget(self, action: #selector(SecondViewController.update), for: UIControlEvents.valueChanged)
-        myTable.addSubview(refresher)
+        myTable.refreshControl = refresher
         
     }
 

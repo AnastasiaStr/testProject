@@ -42,9 +42,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
         feedTableView.register(VideoTableViewCell.self)
         
         refresher = UIRefreshControl()
-        refresher.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refresher.attributedTitle = NSAttributedString(string: "")
         refresher.addTarget(self, action: #selector(SecondViewController.update), for: UIControlEvents.valueChanged)
-        feedTableView.addSubview(refresher)
+        feedTableView.tableHeaderView = refresher
         
         
     }

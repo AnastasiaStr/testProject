@@ -29,7 +29,7 @@ class DataManager {
         
         Alamofire.request(loginUrl, method: .post, parameters: params).responseJSON { response in
             let result = JSON(response.result.value)
-
+            
             if let user = User(json: result) {
                 self.currentUser = user
 
