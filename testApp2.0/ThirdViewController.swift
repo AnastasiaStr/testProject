@@ -27,14 +27,15 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
         myButton.layer.cornerRadius = 6
         myUsername.layer.cornerRadius = 6
         myPassword.layer.cornerRadius = 6
-
+        
         myUsername.delegate = self
         myPassword.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(gotUser(_:)), name: .GotUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didFailGetUser(_:)), name: .DidFailGetUser, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(logoutComplete(_:)), name: .CompleteLogout, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didFailCompleteLogout(_:)), name: .DidFailCompleteLogout, object: nil)
         
-
         feedTableView.delegate = self
         feedTableView.dataSource = self
         
@@ -66,14 +67,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     @IBAction func pressLogoutButton(_ sender: Any) {
         HUD.show(.progress)
         DataManager.instance.logout()
-        //так не пашет
-        //NotificationCenter.default.addObserver(self, selector: #selector(logoutComplete(_:)), name: .CompleteLogout, object: nil)
-        
-        //так пашет
-        HUD.hide()
-        logoutButton.isHidden = true
-        feedTableView.isHidden = true
-        loginStack.isHidden = false
         
     }
     
@@ -97,7 +90,7 @@ extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return VideoTableViewCell.hight
+        return 274
     }
     
     func update () {
@@ -132,5 +125,11 @@ extension ThirdViewController {
         feedTableView.isHidden = true
         loginStack.isHidden = false
     }
+    
+    @objc fileprivate func didFailCompleteLogout(_ notification: Notification) {
+        HUD.hide()
+        showMessage(title: "Ошибка")
+    }
+    
     
 }

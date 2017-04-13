@@ -48,15 +48,13 @@ class DataManager {
         
         Alamofire.request(logoutUrl, method: .post, parameters: token).responseJSON { response in
             let result = JSON(response.result.value)
-            print (result)
             
-           /* if let user = User(json: result) {
-                self.currentUser = user
-                
-                NotificationCenter.default.post(name: .GotUser, object: nil)
+            if let statusField = result["status"].bool, statusField == true {
+                self.currentUser = nil
+                NotificationCenter.default.post(name: .CompleteLogout, object: nil)
             } else {
-                NotificationCenter.default.post(name: .DidFailGetUser, object: nil)
-            }*/
+                NotificationCenter.default.post(name: .DidFailCompleteLogout, object: nil)
+            }
             
         }
     }

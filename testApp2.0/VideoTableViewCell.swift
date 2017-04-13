@@ -9,8 +9,6 @@
 import UIKit
 
 class VideoTableViewCell: UITableViewCell, NibLoadableView, ReusableView {
-    
-    static let hight: CGFloat = 185
 
     @IBOutlet weak var myImage: UIImageView!
 

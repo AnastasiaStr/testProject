@@ -24,6 +24,7 @@
 		C85911F31E9EBCC20099F4E2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F21E9EBCC20099F4E2 /* DataManager.swift */; };
 		C85911F61E9EBD6F0099F4E2 /* Notofications+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */; };
 		C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F81E9EC26E0099F4E2 /* Alertable.swift */; };
+		C8953B1C1EA003F200BBE9D7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8953B1B1EA003F200BBE9D7 /* Video.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		C85911F21E9EBCC20099F4E2 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Notofications+Extension.swift"; path = "Extensions/Notofications+Extension.swift"; sourceTree = "<group>"; };
 		C85911F81E9EC26E0099F4E2 /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alertable.swift; path = Protocols/Alertable.swift; sourceTree = "<group>"; };
+		C8953B1B1EA003F200BBE9D7 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Video.swift; path = Model/Entities/Video.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				C85911F01E9EBAEB0099F4E2 /* User.swift */,
+				C8953B1B1EA003F200BBE9D7 /* Video.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */,
 				5D59E50F1E9D3BFB00499577 /* ThirdViewController.swift in Sources */,
 				C85911F11E9EBAEB0099F4E2 /* User.swift in Sources */,
+				C8953B1C1EA003F200BBE9D7 /* Video.swift in Sources */,
 				5D59E4FB1E9D3B9000499577 /* AppDelegate.swift in Sources */,
 				5D59E5221E9D490500499577 /* ReusableView.swift in Sources */,
 				5D59E5211E9D490500499577 /* UITableView+Extension.swift in Sources */,

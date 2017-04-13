@@ -12,7 +12,9 @@ extension Notification.Name {
     
     static let DidFailGetUser = Notification.Name("DidFailGetUser")
     static let GotUser = Notification.Name("GotUser")
+    
     static let CompleteLogout = Notification.Name("CompleteLogout")
+    static let DidFailCompleteLogout = Notification.Name("DidFailCompleteLogout")
     
     
 }
