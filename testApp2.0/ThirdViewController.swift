@@ -14,11 +14,16 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     @IBOutlet weak var myUsername: UITextField!
     @IBOutlet weak var myPassword: UITextField!
     @IBOutlet weak var myButton: UIButton!
-    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var feedTableView: UITableView!
+    @IBOutlet weak var loginStack: UIStackView!
+    @IBOutlet weak var logoutButton: UIButton!
+    var urlArray:[String] = ["https://d1wst0behutosd.cloudfront.net/thumbnails/14818578.jpg?v1r1491791023", "https://d1wst0behutosd.cloudfront.net/thumbnails/14861286.jpg?v1r1491945878"]
+    var refresher: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        logoutButton.isHidden = true
+        feedTableView.isHidden = true
         myButton.layer.cornerRadius = 6
         myUsername.layer.cornerRadius = 6
         myPassword.layer.cornerRadius = 6
@@ -29,6 +34,16 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
         NotificationCenter.default.addObserver(self, selector: #selector(gotUser(_:)), name: .GotUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didFailGetUser(_:)), name: .DidFailGetUser, object: nil)
         
+
+        feedTableView.delegate = self
+        feedTableView.dataSource = self
+        
+        feedTableView.register(VideoTableViewCell.self)
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refresher.addTarget(self, action: #selector(SecondViewController.update), for: UIControlEvents.valueChanged)
+        feedTableView.addSubview(refresher)
         
         
     }
@@ -41,10 +56,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     }
 
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-
-    }
-    
     @IBAction func myLoginButton(_ sender: Any) {
         if let username = myUsername.text, let password = myPassword.text {
             HUD.show(.progress)
@@ -52,11 +63,49 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
         }
     }
     
-    func DoLogin (_ user: String, _ psw: String) {
-        let url = URL(string: "https://")
+    @IBAction func pressLogoutButton(_ sender: Any) {
+        HUD.show(.progress)
+        DataManager.instance.logout()
+        //так не пашет
+        //NotificationCenter.default.addObserver(self, selector: #selector(logoutComplete(_:)), name: .CompleteLogout, object: nil)
+        
+        //так пашет
+        HUD.hide()
+        logoutButton.isHidden = true
+        feedTableView.isHidden = true
+        loginStack.isHidden = false
+        
     }
+    
+ 
 
+}
 
+extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+        return urlArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        
+        if let url = URL(string: urlArray[indexPath.row]) {
+            cell.myImage?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return VideoTableViewCell.hight
+    }
+    
+    func update () {
+        urlArray.append("https://d1wst0behutosd.cloudfront.net/thumbnails/14832798.jpg?v1r1491836904")
+        feedTableView.reloadData()
+        refresher.endRefreshing()
+        
+    }
 }
 
 // MARK: - Notification handlers
@@ -65,15 +114,23 @@ extension ThirdViewController {
     @objc fileprivate func gotUser(_ notification: Notification) {
         HUD.hide()
         if let user = DataManager.instance.currentUser {
-            loginLabel.text = "Вы нежно вошли как \(user.login)"
+            loginStack.isHidden = true
+            logoutButton.isHidden = false
+            feedTableView.isHidden = false
         }
-        
     }
     
     @objc fileprivate func didFailGetUser(_ notification: Notification) {
         HUD.hide()
         //Я тут потом допишу разные ошибки при логине
         showMessage(title: nil, message: "Ошибка")
+    }
+    
+    @objc fileprivate func logoutComplete(_ notification: Notification) {
+        HUD.hide()
+        logoutButton.isHidden = true
+        feedTableView.isHidden = true
+        loginStack.isHidden = false
     }
     
 }

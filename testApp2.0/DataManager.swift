@@ -13,6 +13,8 @@ import SwiftyJSON
 class DataManager {
     
     private let loginUrl = "https://api.vid.me/auth/create"
+    private let logoutUrl = "https://api.vid.me/auth/delete"
+
     
     private init() {}
     static let instance = DataManager()
@@ -27,8 +29,10 @@ class DataManager {
         
         Alamofire.request(loginUrl, method: .post, parameters: params).responseJSON { response in
             let result = JSON(response.result.value)
+
             if let user = User(json: result) {
                 self.currentUser = user
+
                 NotificationCenter.default.post(name: .GotUser, object: nil)
             } else {
                 NotificationCenter.default.post(name: .DidFailGetUser, object: nil)
@@ -38,5 +42,23 @@ class DataManager {
         
     }
     
+    func logout () {
+        
+        let token: [String : Any] = ["token" : currentUser?.token]
+        
+        Alamofire.request(logoutUrl, method: .post, parameters: token).responseJSON { response in
+            let result = JSON(response.result.value)
+            print (result)
+            
+           /* if let user = User(json: result) {
+                self.currentUser = user
+                
+                NotificationCenter.default.post(name: .GotUser, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .DidFailGetUser, object: nil)
+            }*/
+            
+        }
+    }
     
 }
