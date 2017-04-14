@@ -19,21 +19,40 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="273.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MRN-RU-HGE">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MRN-RU-HGE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="375" id="Qsc-qj-iWt"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text=" videoName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz1-e0-xlg">
-                        <rect key="frame" x="27" y="231" width="91" height="21"/>
+                        <rect key="frame" x="8" y="231" width="91" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRc-ue-UhM">
+                        <rect key="frame" x="263" y="229" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAn-bE-NWo">
+                        <rect key="frame" x="205" y="225" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="2zm-KA-ZJg"/>
+                            <constraint firstAttribute="width" constant="40" id="Zm7-8Z-d3B"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="no_like"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MRN-RU-HGE" secondAttribute="trailing" id="0Qn-Rr-MLW"/>
+                    <constraint firstItem="hRc-ue-UhM" firstAttribute="leading" secondItem="mAn-bE-NWo" secondAttribute="trailing" constant="18" id="9lu-Us-1Ay"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="mAn-bE-NWo" secondAttribute="bottom" constant="0.5" id="BM8-qT-6bK"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="hRc-ue-UhM" secondAttribute="trailing" constant="62" id="Iw9-MC-fww"/>
+                    <constraint firstItem="hRc-ue-UhM" firstAttribute="top" secondItem="MRN-RU-HGE" secondAttribute="bottom" constant="17" id="P92-Kr-G5M"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hRc-ue-UhM" secondAttribute="bottom" constant="15.5" id="Rn7-iM-UWs"/>
                     <constraint firstItem="MRN-RU-HGE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TjU-eI-c6k"/>
                     <constraint firstItem="MRN-RU-HGE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gXQ-hl-cDs"/>
                     <constraint firstItem="Nz1-e0-xlg" firstAttribute="top" secondItem="MRN-RU-HGE" secondAttribute="bottom" constant="19" id="nzR-kh-HIF"/>
@@ -46,4 +65,7 @@
             <point key="canvasLocation" x="45.5" y="169"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="no_like" width="128" height="128"/>
+    </resources>
 </document>

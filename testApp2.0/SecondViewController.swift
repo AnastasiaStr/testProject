@@ -61,9 +61,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         if count != 0 {
             if let url = currVideos[indexPath.row]?.thumbnailUrl {
-                cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
+                cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image2"))
             }
-                
+                           
         }
 
         return cell
