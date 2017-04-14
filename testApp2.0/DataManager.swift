@@ -14,6 +14,8 @@ class DataManager {
     
     private let loginUrl = "https://api.vid.me/auth/create"
     private let logoutUrl = "https://api.vid.me/auth/delete"
+    private let getFeaturedUrl = "https://api.vid.me/videos/featured"
+    private let getNewUrl = "https://api.vid.me/videos/new"
 
     
     private init() {}
@@ -21,6 +23,22 @@ class DataManager {
     
     
     private(set) var currentUser: User?
+    private(set) var currentVideo: Video?
+    
+    func getVideo (amount: Int) {
+        let params: [String : Any] = [:]
+        Alamofire.request(getFeaturedUrl, method: .get, parameters: params).responseJSON { response in
+            let result = JSON(response.result.value)
+            
+            if let statusField = result["status"].bool, statusField == true {
+                
+                self.currentVideo = Video(json: result["videos"][amount])!
+                 NotificationCenter.default.post(name: .GotVideo, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .DidFailGetVideo, object: nil)
+            }
+        }
+    }
     
     
     func login(login: String, password: String) {
@@ -58,5 +76,4 @@ class DataManager {
             
         }
     }
-    
 }

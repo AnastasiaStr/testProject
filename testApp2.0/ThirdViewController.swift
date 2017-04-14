@@ -67,6 +67,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     @IBAction func pressLogoutButton(_ sender: Any) {
         HUD.show(.progress)
         DataManager.instance.logout()
+
         
     }
     

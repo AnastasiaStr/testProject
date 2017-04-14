@@ -16,5 +16,8 @@ extension Notification.Name {
     static let CompleteLogout = Notification.Name("CompleteLogout")
     static let DidFailCompleteLogout = Notification.Name("DidFailCompleteLogout")
     
+    static let GotVideo = Notification.Name("GotVideo")
+    static let DidFailGetVideo = Notification.Name("DidFailGetVideo")
+    
     
 }
