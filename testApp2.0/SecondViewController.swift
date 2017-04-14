@@ -47,6 +47,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         
     }
+    
 
 
     
@@ -61,16 +62,28 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if count != 0 {
             if let url = currVideos[indexPath.row]?.thumbnailUrl {
                 cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
-                print (url)
             }
+                
         }
-        print ("lol")
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 274
+        
+        if count != 0 {
+            let height = currVideos[indexPath.row]?.height
+            let width = currVideos[indexPath.row]?.width
+            let proportion = 375/width!
+            
+            
+            let result = height!*proportion + 50
+            print(height, width, proportion, result)
+            return CGFloat(result)
+        }
+        
+        
+        return 0
     }
     
  

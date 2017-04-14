@@ -27,7 +27,7 @@ class DataManager {
     
     func getVideo (amount: Int) {
         let params: [String : Any] = [:]
-        Alamofire.request(getFeaturedUrl, method: .get, parameters: params).responseJSON { response in
+        Alamofire.request(getNewUrl, method: .get, parameters: params).responseJSON { response in
             let result = JSON(response.result.value)
             
             if let statusField = result["status"].bool, statusField == true {
@@ -39,11 +39,9 @@ class DataManager {
                 
                     let video = Video(json: result["videos"][amount + i])!
                     self.currentVideos.append(video)
-                
-                    print(video.thumbnailUrl)
-                    print(self.currentVideos[amount + i]?.thumbnailUrl)
-                    NotificationCenter.default.post(name: .GotVideo, object: nil)
+                 
                 }
+                NotificationCenter.default.post(name: .GotVideo, object: nil)
             } else {
                 NotificationCenter.default.post(name: .DidFailGetVideo, object: nil)
             }
