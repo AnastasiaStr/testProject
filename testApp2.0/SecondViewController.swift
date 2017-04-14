@@ -59,11 +59,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print(indexPath.row)
         
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        if let url = currVideos?[countSKA]?.thumbnailUrl {
-            cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
-            print (url)
+        //if let url = currVideos?[countSKA]?.thumbnailUrl {
+            //cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
+           // print (url)
 
-        }
+       // }
         print ("lol")
 
         return cell
@@ -87,15 +87,15 @@ extension SecondViewController {
     
     @objc fileprivate func gotVideo(_ notification: Notification) {
         print ("lola")
-        currVideos?[countSKA] = DataManager.instance.currentVideo
-        print(DataManager.instance.currentVideo?.thumbnailUrl)
-        print (currVideos?[countSKA]?.thumbnailUrl)
+        /*currVideos?[countSKA] = DataManager.instance.currentVideos
+       // print(DataManager.instance.currentVideo?.thumbnailUrl)
+       / print (currVideos?[countSKA]?.thumbnailUrl)
         countSKA = countSKA + 1
         if countSKA == 8 {
             myTable.reloadData()
             HUD.hide()
         }
-        print (countSKA)
+        print (countSKA)*/
         print ("azaza")
     }
     

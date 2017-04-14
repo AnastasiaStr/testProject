@@ -23,7 +23,7 @@ class DataManager {
     
     
     private(set) var currentUser: User?
-    private(set) var currentVideo: Video?
+    private(set) var currentVideos: [Video?]?
     
     func getVideo (amount: Int) {
         let params: [String : Any] = [:]
@@ -31,8 +31,13 @@ class DataManager {
             let result = JSON(response.result.value)
             
             if let statusField = result["status"].bool, statusField == true {
-                
-                self.currentVideo = Video(json: result["videos"][amount])!
+                let video = Video(json: result["videos"][amount])!
+                self.currentVideos?[0] = video
+                 print(video.thumbnailUrl)
+                print(self.currentVideos?[0]?.thumbnailUrl)
+                 print(self.currentVideos?[0]?.thumbnailUrl)
+                 print(self.currentVideos?[0]?.thumbnailUrl)
+                 print(self.currentVideos?[0]?.thumbnailUrl)
                  NotificationCenter.default.post(name: .GotVideo, object: nil)
             } else {
                 NotificationCenter.default.post(name: .DidFailGetVideo, object: nil)

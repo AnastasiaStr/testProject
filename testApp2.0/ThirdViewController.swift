@@ -58,17 +58,19 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
 
     
     @IBAction func myLoginButton(_ sender: Any) {
-        if let username = myUsername.text, let password = myPassword.text {
+       /* if let username = myUsername.text, let password = myPassword.text {
             HUD.show(.progress)
             DataManager.instance.login(login: username, password: password)
-        }
+        }*/
+              DataManager.instance.getVideo(amount: 0)
     }
     
     @IBAction func pressLogoutButton(_ sender: Any) {
         HUD.show(.progress)
         DataManager.instance.logout()
 
-        
+  
+
     }
     
  
