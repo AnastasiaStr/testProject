@@ -14,20 +14,19 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var myTable: UITableView!
     
-    var currVideo: Video?
-
+    var currVideos: [Video?]?
     
     var refresher: UIRefreshControl!
     
     var countSKA = 0
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        DataManager.instance.getVideo(amount: 0)
-        HUD.show(.progress)
+        for i in 0...9 {
+            DataManager.instance.getVideo(amount: i)
+            HUD.show(.progress)
+        }
         
         myTable.delegate = self
         myTable.dataSource = self
@@ -60,7 +59,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print(indexPath.row)
         
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        if let url = currVideo?.thumbnailUrl {
+        if let url = currVideos?[countSKA]?.thumbnailUrl {
             cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
             print (url)
 
@@ -88,11 +87,14 @@ extension SecondViewController {
     
     @objc fileprivate func gotVideo(_ notification: Notification) {
         print ("lola")
-        currVideo = DataManager.instance.currentVideo
-        print (currVideo?.thumbnailUrl)
+        currVideos?[countSKA] = DataManager.instance.currentVideo
+        print(DataManager.instance.currentVideo?.thumbnailUrl)
+        print (currVideos?[countSKA]?.thumbnailUrl)
         countSKA = countSKA + 1
-        myTable.reloadData()
-        HUD.hide()
+        if countSKA == 8 {
+            myTable.reloadData()
+            HUD.hide()
+        }
         print (countSKA)
         print ("azaza")
     }
