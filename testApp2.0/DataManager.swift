@@ -23,7 +23,7 @@ class DataManager {
     
     
     private(set) var currentUser: User?
-    private(set) var currentVideos: [Video?]?
+    private(set) var currentVideos: [Video?] = [Video(json: nil)]
     
     func getVideo (amount: Int) {
         let params: [String : Any] = [:]
@@ -31,14 +31,19 @@ class DataManager {
             let result = JSON(response.result.value)
             
             if let statusField = result["status"].bool, statusField == true {
-                let video = Video(json: result["videos"][amount])!
-                self.currentVideos?[0] = video
-                 print(video.thumbnailUrl)
-                print(self.currentVideos?[0]?.thumbnailUrl)
-                 print(self.currentVideos?[0]?.thumbnailUrl)
-                 print(self.currentVideos?[0]?.thumbnailUrl)
-                 print(self.currentVideos?[0]?.thumbnailUrl)
-                 NotificationCenter.default.post(name: .GotVideo, object: nil)
+                
+                let temp = Video(json: result["videos"][amount])!
+                self.currentVideos[amount] = temp
+                
+                for i in 1...9 {
+                
+                    let video = Video(json: result["videos"][amount + i])!
+                    self.currentVideos.append(video)
+                
+                    print(video.thumbnailUrl)
+                    print(self.currentVideos[amount + i]?.thumbnailUrl)
+                    NotificationCenter.default.post(name: .GotVideo, object: nil)
+                }
             } else {
                 NotificationCenter.default.post(name: .DidFailGetVideo, object: nil)
             }

@@ -14,19 +14,18 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var myTable: UITableView!
     
-    var currVideos: [Video?]?
+    var currVideos: [Video?] = []
     
     var refresher: UIRefreshControl!
     
-    var countSKA = 0
+    var count = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in 0...9 {
-            DataManager.instance.getVideo(amount: i)
-            HUD.show(.progress)
-        }
+        
+        DataManager.instance.getVideo(amount: 0)
+        HUD.show(.progress)
         
         myTable.delegate = self
         myTable.dataSource = self
@@ -52,18 +51,19 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return countSKA
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
         
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        //if let url = currVideos?[countSKA]?.thumbnailUrl {
-            //cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
-           // print (url)
-
-       // }
+        if count != 0 {
+            if let url = currVideos[indexPath.row]?.thumbnailUrl {
+                cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
+                print (url)
+            }
+        }
         print ("lol")
 
         return cell
@@ -87,15 +87,11 @@ extension SecondViewController {
     
     @objc fileprivate func gotVideo(_ notification: Notification) {
         print ("lola")
-        /*currVideos?[countSKA] = DataManager.instance.currentVideos
-       // print(DataManager.instance.currentVideo?.thumbnailUrl)
-       / print (currVideos?[countSKA]?.thumbnailUrl)
-        countSKA = countSKA + 1
-        if countSKA == 8 {
-            myTable.reloadData()
-            HUD.hide()
-        }
-        print (countSKA)*/
+        currVideos = DataManager.instance.currentVideos
+        count = count + 10
+        myTable.reloadData()
+        HUD.hide()
+        print (count)
         print ("azaza")
     }
     
