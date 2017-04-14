@@ -89,8 +89,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
  
     
     func update () {
-        
-        myTable.reloadData()
+        DataManager.instance.getVideo(amount: 0)
+        HUD.show(.progress)
+        //myTable.reloadData()
         refresher.endRefreshing()
   
     }
