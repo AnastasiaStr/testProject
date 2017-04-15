@@ -20,6 +20,7 @@
 		5D59E5221E9D490500499577 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D59E51F1E9D490500499577 /* ReusableView.swift */; };
 		5D59E5231E9D490500499577 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D59E5201E9D490500499577 /* NibLoadableView.swift */; };
 		81279EB3EA2C373B48C447F2 /* Pods_testApp2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062ED324036FC1E900FBF802 /* Pods_testApp2_0.framework */; };
+		C80B900E1EA2ACFF00526516 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80B900D1EA2ACFF00526516 /* Utils.swift */; };
 		C85911F11E9EBAEB0099F4E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F01E9EBAEB0099F4E2 /* User.swift */; };
 		C85911F31E9EBCC20099F4E2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F21E9EBCC20099F4E2 /* DataManager.swift */; };
 		C85911F61E9EBD6F0099F4E2 /* Notofications+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */; };
@@ -46,6 +47,7 @@
 		5D59E5201E9D490500499577 /* NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadableView.swift; sourceTree = "<group>"; };
 		811A4F3EC05CD1B2F2F4183F /* Pods-testApp2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp2.0/Pods-testApp2.0.release.xcconfig"; sourceTree = "<group>"; };
 		C172646C838EC91EBE95D205 /* Pods-testApp2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp2.0/Pods-testApp2.0.debug.xcconfig"; sourceTree = "<group>"; };
+		C80B900D1EA2ACFF00526516 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
 		C85911F01E9EBAEB0099F4E2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/Entities/User.swift; sourceTree = "<group>"; };
 		C85911F21E9EBCC20099F4E2 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Notofications+Extension.swift"; path = "Extensions/Notofications+Extension.swift"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 		5D59E4F91E9D3B9000499577 /* testApp2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				C80B900C1EA2ACEC00526516 /* Utils */,
 				C89856981EA2258600F16839 /* Video */,
 				C85911F71E9EC25E0099F4E2 /* Protocols */,
 				C85911F41E9EBD5C0099F4E2 /* Extensions */,
@@ -123,6 +126,14 @@
 				811A4F3EC05CD1B2F2F4183F /* Pods-testApp2.0.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		C80B900C1EA2ACEC00526516 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C80B900D1EA2ACFF00526516 /* Utils.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		C85911EE1E9EBACD0099F4E2 /* Model */ = {
@@ -296,6 +307,7 @@
 				5D59E50D1E9D3BEA00499577 /* SecondViewController.swift in Sources */,
 				C85911F61E9EBD6F0099F4E2 /* Notofications+Extension.swift in Sources */,
 				5D59E51D1E9D48CB00499577 /* VideoTableViewCell.swift in Sources */,
+				C80B900E1EA2ACFF00526516 /* Utils.swift in Sources */,
 				5D59E4FD1E9D3B9000499577 /* FeaturedViewController.swift in Sources */,
 				C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */,
 				5D59E50F1E9D3BFB00499577 /* ThirdViewController.swift in Sources */,

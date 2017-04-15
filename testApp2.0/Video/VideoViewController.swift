@@ -79,20 +79,23 @@ class VideoPlayerView : UIView {
         return button
     }()
     
-    var isPlaying = true
+    var isPlaying = false
     
     func handlePause () {
         
-        if isPlaying == true {
+        if isPlaying {
             player?.pause()
             pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
         } else {
             player?.play()
             pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
         }
-        let tmp = !isPlaying
-        isPlaying = tmp
+        
+        
+        
+        isPlaying = !isPlaying
     
+        
     }
     
     let controlsContainerView: UIView = {
@@ -146,7 +149,7 @@ class VideoPlayerView : UIView {
     var player: AVPlayer?
     
     func setupPlayerView () {
-        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14922318/48292782.mp4?Expires=1492291935&Signature=VrETCokts3-THAhzJiTEo7M3EsBmc5UqhxEQvpXCl2NF1qqwr9ai4NeQwUCkuGOEshTU6n-taeXohfVYYM~w-8Sf~K1~zV3kIazWBseUxvfYTOCTghlrG4sV9N8f1EKBmKHWNkldX8CNgaQCuNgtT5Qa79JcBDwu9D7NAJX0xrP7s12wX7vJ7A8SarNSbXiOynBotkYxgOXAPmepj23kMFhSbSZ624BdDXy-lrmObVrLiHkp8Q0c22j3aTz~WkC4X148p2vCVO2ltKMkGNeExgm0eK0iWgexA6ZsPL~z7UwBisyv-rUofA4LF1DDJ96j8avEWAoco6wcAfTDLQKZcA__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
+        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14908695/48221655.mp4?Expires=1492281609&Signature=A3b0FejDMEHiK01J2uPjK0kupt~CTmxW~3~DFw4myzEkEqqRO3BvCBvL9OZrqQKjPPgd9YbdAAKMklTgZFLKRI-oBF4NEY43bYF42H-ftJA4EPLwXO-ZEyGbp-e102w0NiUkF6wujCXLeVbMW7r-axs5FkhHP8-TmvfVB990nu51b7l2PZhJ2EICy0hCFMx-9JsR3Ob-a-CAVBNawIAHDyQlEuEGeeqZUZXccx68lTOwoBnlZ4ZNEU3aJ62hLpcqBwFPrPR77a0lFRdrti8fs3vcI2QOR5nmi~uq2d4nLA8tlFNjfQlwBph5X2PNtuaMiza4W6Jj~vbBBQViY9zKWA__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
         
         if let url = URL(string: urlString) {
             player = AVPlayer(url: url)
@@ -158,12 +161,7 @@ class VideoPlayerView : UIView {
             player?.play()
             
             player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-            
-            let interval = CMTime(value: 1, timescale: 2)
-            player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
-                let seconds = CMTimeGetSeconds(progressTime)
-                
-            })
+            //player?.addPeriodicTimeObserver(forInterval: <#T##CMTime#>, queue: <#T##DispatchQueue?#>, using: <#T##(CMTime) -> Void#>)
         }
     }
     
@@ -172,7 +170,7 @@ class VideoPlayerView : UIView {
             activityIndicatorView.stopAnimating()
             controlsContainerView.backgroundColor = .clear
             pausePlayButton.isHidden = false
-            //isPlaying = true
+            isPlaying = true
             
             if let duration = player?.currentItem?.duration {
                 let seconds = CMTimeGetSeconds(duration)

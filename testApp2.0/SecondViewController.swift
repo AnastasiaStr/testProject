@@ -89,7 +89,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let height = currVideos[indexPath.row].height
         let width = currVideos[indexPath.row].width
-        let proportion = 375 / width
+        let proportion = Double(self.view.bounds.width) / width
         
         let result = height * proportion + 10
         return CGFloat(result)
