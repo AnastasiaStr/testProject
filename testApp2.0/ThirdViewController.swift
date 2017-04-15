@@ -44,8 +44,8 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
         
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "")
-        refresher.addTarget(self, action: #selector(SecondViewController.update), for: UIControlEvents.valueChanged)
-        feedTableView.tableHeaderView = refresher
+        refresher.addTarget(self, action: #selector(update), for: UIControlEvents.valueChanged)
+        feedTableView.refreshControl = refresher
         
         
     }
@@ -97,7 +97,7 @@ extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
         return 274
     }
     
-    func update () {
+    @objc func update () {
         urlArray.append("https://d1wst0behutosd.cloudfront.net/thumbnails/14832798.jpg?v1r1491836904")
         feedTableView.reloadData()
         refresher.endRefreshing()

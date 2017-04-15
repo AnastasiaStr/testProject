@@ -13,7 +13,7 @@ struct Video {
     let id: String
     let url: String
     let title: String
-    let likesCount: String
+    let likesCount: Int
     let thumbnailUrl: String
     let height: Double
     let width: Double
@@ -33,7 +33,7 @@ extension Video {
         self.id = videoId
         self.url = url.replacingOccurrences(of: "\\", with: "")
         self.title = title
-        self.likesCount = String(likesCount)
+        self.likesCount = likesCount
         self.thumbnailUrl = thumbnailUrl.replacingOccurrences(of: "\\", with: "")
         self.height = height
         self.width = width

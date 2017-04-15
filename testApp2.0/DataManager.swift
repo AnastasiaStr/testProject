@@ -23,24 +23,28 @@ class DataManager {
     
     
     private(set) var currentUser: User?
-    private(set) var currentVideos: [Video?] = [Video(json: nil)]
+    private(set) var currentVideos: [Video] = []
     
     func getVideo (amount: Int) {
-        let params: [String : Any] = [:]
+        let params: [String : Any] = ["offset" : amount, "limit" : 10]
+        
         Alamofire.request(getNewUrl, method: .get, parameters: params).responseJSON { response in
-            let result = JSON(response.result.value)
+            let result = JSON(response.result.value as Any)
+            let videosJson = result["videos"].arrayValue
             
             if let statusField = result["status"].bool, statusField == true {
                 
-                let temp = Video(json: result["videos"][amount])!
-                self.currentVideos[amount] = temp
+                var tmpVideos: [Video] = []
                 
-                for i in 1...9 {
+                for jsonVideo in videosJson {
                 
-                    let video = Video(json: result["videos"][amount + i])!
-                    self.currentVideos.append(video)
+                    if let video = Video(json: jsonVideo) {
+                        tmpVideos.append(video)
+                    }
                  
                 }
+                self.currentVideos.append(contentsOf: tmpVideos)
+                
                 NotificationCenter.default.post(name: .GotVideo, object: nil)
             } else {
                 NotificationCenter.default.post(name: .DidFailGetVideo, object: nil)
@@ -54,7 +58,7 @@ class DataManager {
         let params: [String : Any] = ["username" : login, "password" : password]
         
         Alamofire.request(loginUrl, method: .post, parameters: params).responseJSON { response in
-            let result = JSON(response.result.value)
+            let result = JSON(response.result.value as Any)
             
             if let user = User(json: result) {
                 self.currentUser = user

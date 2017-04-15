@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,34 +21,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MRN-RU-HGE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="212.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="227.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="375" id="Qsc-qj-iWt"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" videoName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nz1-e0-xlg">
-                        <rect key="frame" x="8" y="231.5" width="91" height="20.5"/>
+                        <rect key="frame" x="8" y="237.5" width="249.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="M7n-CM-Q6W">
-                        <rect key="frame" x="250" y="221" width="82" height="40"/>
+                        <rect key="frame" x="265.5" y="236" width="93.5" height="25"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAn-bE-NWo">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="Nmw-ev-wnG"/>
-                                    <constraint firstAttribute="height" constant="40" id="bRj-oT-mUb"/>
+                                    <constraint firstAttribute="width" constant="25" id="Nmw-ev-wnG"/>
+                                    <constraint firstAttribute="height" constant="25" id="bRj-oT-mUb"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="no_like"/>
                                 <connections>
                                     <action selector="likeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Blc-V4-HJm"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRc-ue-UhM">
-                                <rect key="frame" x="48" y="0.0" width="34" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRc-ue-UhM">
+                                <rect key="frame" x="33" y="0.0" width="60.5" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -58,12 +59,14 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MRN-RU-HGE" secondAttribute="trailing" id="0Qn-Rr-MLW"/>
                     <constraint firstItem="M7n-CM-Q6W" firstAttribute="top" secondItem="MRN-RU-HGE" secondAttribute="bottom" constant="8.5" id="1ir-Tb-fp8"/>
-                    <constraint firstItem="Nz1-e0-xlg" firstAttribute="top" secondItem="MRN-RU-HGE" secondAttribute="bottom" constant="19" id="6lN-V7-CCP"/>
+                    <constraint firstItem="Nz1-e0-xlg" firstAttribute="top" secondItem="MRN-RU-HGE" secondAttribute="bottom" constant="10" id="6lN-V7-CCP"/>
                     <constraint firstItem="Nz1-e0-xlg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="IIQ-fV-MyN"/>
+                    <constraint firstItem="M7n-CM-Q6W" firstAttribute="leading" secondItem="Nz1-e0-xlg" secondAttribute="trailing" constant="8" id="PHh-mO-11s"/>
                     <constraint firstItem="MRN-RU-HGE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TjU-eI-c6k"/>
                     <constraint firstAttribute="bottomMargin" secondItem="M7n-CM-Q6W" secondAttribute="bottom" constant="4.5" id="XcW-K5-XeB"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Nz1-e0-xlg" secondAttribute="bottom" constant="13.5" id="ZVd-hY-mgY"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="M7n-CM-Q6W" secondAttribute="trailing" constant="35" id="gGn-co-e2C"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Nz1-e0-xlg" secondAttribute="bottom" constant="10" id="ZVd-hY-mgY"/>
+                    <constraint firstItem="M7n-CM-Q6W" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.25" id="eBW-Kz-Olg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="M7n-CM-Q6W" secondAttribute="trailing" constant="8" id="gGn-co-e2C"/>
                     <constraint firstItem="MRN-RU-HGE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gXQ-hl-cDs"/>
                 </constraints>
             </tableViewCellContentView>
