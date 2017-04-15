@@ -23,6 +23,8 @@ class DataManager {
     
     private(set) var currentUser: User?
     private(set) var currentVideos: [Video] = []
+    private(set) var featuredVideos: [Video] = []
+    
     
     func getVideo (amount: Int) {
         let params: [String : Any] = ["offset" : amount, "limit" : 10]
@@ -51,6 +53,32 @@ class DataManager {
         }
     }
     
+    
+    func getFeatured(amount: Int) {
+        let params: [String : Any] = ["offset" : amount, "limit" : 10]
+        
+        Alamofire.request(getNewUrl, method: .get, parameters: params).responseJSON { response in
+            let result = JSON(response.result.value as Any)
+            let videosJson = result["videos"].arrayValue
+            
+            if let statusField = result["status"].bool, statusField == true {
+                
+                var tmpVideos: [Video] = []
+                
+                for jsonVideo in videosJson {
+                    
+                    if let video = Video(json: jsonVideo) {
+                        tmpVideos.append(video)
+                    }
+                }
+                self.featuredVideos.append(contentsOf: tmpVideos)
+                
+                NotificationCenter.default.post(name: .GotFeatured, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .DidFailGetFeatured, object: nil)
+            }
+        }
+    }
 
     
     

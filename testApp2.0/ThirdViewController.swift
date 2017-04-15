@@ -115,6 +115,7 @@ extension ThirdViewController {
             loginStack.isHidden = true
             logoutButton.isHidden = false
             feedTableView.isHidden = false
+            self.view.endEditing(true)
         }
     }
     

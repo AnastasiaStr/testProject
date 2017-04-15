@@ -19,5 +19,8 @@ extension Notification.Name {
     static let GotVideo = Notification.Name("GotVideo")
     static let DidFailGetVideo = Notification.Name("DidFailGetVideo")
     
+    static let GotFeatured = Notification.Name("GotFeatured")
+    static let DidFailGetFeatured = Notification.Name("DidFailGetFeatured")
+    
     
 }

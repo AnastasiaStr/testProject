@@ -10,15 +10,12 @@ import UIKit
 import AlamofireImage
 import PKHUD
 
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Alertable {
 
-    @IBOutlet weak var myTable: UITableView!
+    @IBOutlet fileprivate weak var myTable: UITableView!
     
-    var currVideos: [Video] = []
-    
-    var refresher: UIRefreshControl!
-    
-    var count = 0
+    fileprivate var currVideos: [Video] = []
+    fileprivate var refresher: UIRefreshControl!
     
     
     override func viewDidLoad() {
@@ -64,14 +61,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return count
+        return currVideos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print(indexPath.row)
         
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        guard count != 0 else { return UITableViewCell() }
     
         if let url = URL(string: currVideos[indexPath.row].thumbnailUrl){
             cell.myImage?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image2"))
@@ -91,17 +87,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if count != 0 {
-            let height = currVideos[indexPath.row].height
-            let width = currVideos[indexPath.row].width
-            let proportion = 375 / width
-            
-            let result = height * proportion + 50
-            return CGFloat(result)
-        }
+        let height = currVideos[indexPath.row].height
+        let width = currVideos[indexPath.row].width
+        let proportion = 375 / width
         
-        
-        return 0
+        let result = height * proportion + 10
+        return CGFloat(result)
+    
     }
     
     
@@ -110,10 +102,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let videoVC = VideoViewController()
         videoVC.showVideo()
         videoVC.fullVideoURL = url
-        
-        //navigationController?.pushViewController(videoVC, animated: true)
-        
-        print ("alalala")
       
     }
     
@@ -126,12 +114,13 @@ extension SecondViewController {
     
     @objc fileprivate func gotVideo(_ notification: Notification) {
         currVideos = DataManager.instance.currentVideos
-        count = count + 10
         myTable.reloadData()
         HUD.hide()
     }
     
     @objc fileprivate func didFailGetVideo (_ notification: Notification) {
+        HUD.hide()
+        showMessage(title: "Произошла ошибка")
     }
 
 }
