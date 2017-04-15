@@ -62,6 +62,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if count != 0 {
             if let url = currVideos[indexPath.row]?.thumbnailUrl {
                 cell.myImage?.af_setImage(withURL: URL(string: url)!, placeholderImage: #imageLiteral(resourceName: "placeholder_image2"))
+                let likes = currVideos[indexPath.row]?.likesCount
+                cell.likesLabel.text = likes
             }
                            
         }
