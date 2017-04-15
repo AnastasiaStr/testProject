@@ -69,11 +69,15 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     @IBAction func pressLogoutButton(_ sender: Any) {
         HUD.show(.progress)
         DataManager.instance.logout()
-
-  
-
     }
     
+    
+    @objc func update () {
+        urlArray.append("https://d1wst0behutosd.cloudfront.net/thumbnails/14832798.jpg?v1r1491836904")
+        feedTableView.reloadData()
+        refresher.endRefreshing()
+        
+    }
  
 
 }
@@ -97,12 +101,9 @@ extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
         return 274
     }
     
-    @objc func update () {
-        urlArray.append("https://d1wst0behutosd.cloudfront.net/thumbnails/14832798.jpg?v1r1491836904")
-        feedTableView.reloadData()
-        refresher.endRefreshing()
-        
-    }
+    
+    
+    
 }
 
 // MARK: - Notification handlers

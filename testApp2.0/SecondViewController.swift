@@ -47,6 +47,19 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
 
+    
+    
+    @objc private func update () {
+        DataManager.instance.getVideo(amount: 0)
+        //HUD.show(.progress)
+        refresher.endRefreshing()
+        
+    }
+    
+    private func loadMore() {
+        DataManager.instance.getVideo(amount: currVideos.count)
+    }
+    
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -89,18 +102,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 0
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let url = currVideos[indexPath.row].url
+        let videoVC = VideoViewController()
+        videoVC.fullVideoURL = url
+        
+        navigationController?.pushViewController(videoVC, animated: true)
+    }
  
-    
-    @objc private func update () {
-        DataManager.instance.getVideo(amount: 0)
-        //HUD.show(.progress)
-        refresher.endRefreshing()
   
-    }
-    
-    private func loadMore() {
-        DataManager.instance.getVideo(amount: currVideos.count)
-    }
 }
 
 extension SecondViewController {

@@ -25,6 +25,8 @@
 		C85911F61E9EBD6F0099F4E2 /* Notofications+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */; };
 		C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F81E9EC26E0099F4E2 /* Alertable.swift */; };
 		C8953B1C1EA003F200BBE9D7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8953B1B1EA003F200BBE9D7 /* Video.swift */; };
+		C898569B1EA225CB00F16839 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89856991EA225CB00F16839 /* VideoViewController.swift */; };
+		C898569C1EA225CB00F16839 /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C898569A1EA225CB00F16839 /* VideoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Notofications+Extension.swift"; path = "Extensions/Notofications+Extension.swift"; sourceTree = "<group>"; };
 		C85911F81E9EC26E0099F4E2 /* Alertable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alertable.swift; path = Protocols/Alertable.swift; sourceTree = "<group>"; };
 		C8953B1B1EA003F200BBE9D7 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Video.swift; path = Model/Entities/Video.swift; sourceTree = "<group>"; };
+		C89856991EA225CB00F16839 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoViewController.swift; path = Video/VideoViewController.swift; sourceTree = "<group>"; };
+		C898569A1EA225CB00F16839 /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoViewController.xib; path = Video/VideoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 		5D59E4F91E9D3B9000499577 /* testApp2.0 */ = {
 			isa = PBXGroup;
 			children = (
+				C89856981EA2258600F16839 /* Video */,
 				C85911F71E9EC25E0099F4E2 /* Protocols */,
 				C85911F41E9EBD5C0099F4E2 /* Extensions */,
 				C85911EE1E9EBACD0099F4E2 /* Model */,
@@ -154,6 +159,15 @@
 				C85911F81E9EC26E0099F4E2 /* Alertable.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		C89856981EA2258600F16839 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				C89856991EA225CB00F16839 /* VideoViewController.swift */,
+				C898569A1EA225CB00F16839 /* VideoViewController.xib */,
+			);
+			name = Video;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +235,7 @@
 				5D59E5051E9D3B9000499577 /* LaunchScreen.storyboard in Resources */,
 				5D59E5131E9D46BE00499577 /* VideoTableViewCell.xib in Resources */,
 				5D59E5021E9D3B9000499577 /* Assets.xcassets in Resources */,
+				C898569C1EA225CB00F16839 /* VideoViewController.xib in Resources */,
 				5D59E5001E9D3B9000499577 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +303,7 @@
 				5D59E4FD1E9D3B9000499577 /* ViewController.swift in Sources */,
 				C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */,
 				5D59E50F1E9D3BFB00499577 /* ThirdViewController.swift in Sources */,
+				C898569B1EA225CB00F16839 /* VideoViewController.swift in Sources */,
 				C85911F11E9EBAEB0099F4E2 /* User.swift in Sources */,
 				C8953B1C1EA003F200BBE9D7 /* Video.swift in Sources */,
 				5D59E4FB1E9D3B9000499577 /* AppDelegate.swift in Sources */,
