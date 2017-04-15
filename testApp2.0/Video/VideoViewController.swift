@@ -20,6 +20,38 @@ class VideoPlayerView : UIView {
         return aiv
     }()
     
+    let pausePlayButton : UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "pause")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
+        button.isHidden = true
+        
+        button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    var isPlaying = false
+    
+    func handlePause () {
+        
+        if isPlaying {
+            player?.pause()
+            pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
+        } else {
+            player?.play()
+            pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
+        }
+        
+        
+        
+        isPlaying = !isPlaying
+    
+        
+    }
+    
     let controlsContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0, alpha: 1)
@@ -30,30 +62,40 @@ class VideoPlayerView : UIView {
         super.init(frame: frame)
         
         setupPlayerView()
-        
+        backgroundColor = .black
         controlsContainerView.frame = frame
         addSubview(controlsContainerView)
+        
         controlsContainerView.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        backgroundColor = .black
+       
+        
+        controlsContainerView.addSubview(pausePlayButton)
+        pausePlayButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        pausePlayButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        pausePlayButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         
 
     }
     
+    var player: AVPlayer?
+    
     func setupPlayerView () {
-        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14919399/48276825.mp4?Expires=1492266645&Signature=lFnv4v4y7mGYEGtpPpY88O918M~tTGo4SnKepNY5587v951pHkhjSW0zD6ImIIK~K65QfFuvE0MARQpT5U9OiKezlu7yxnct7QiMxL1nUpnWYfrerTOEKVVEXsx6h7Tf-evfT3zoyE5~ZI5v0JrhbJgmaa36bunQvqM-g-eKnyMpS~9A3KyZIJl6e5CBpW~2aWrin8HqM7dhvb~LT0qNWk9TSrH6vae1W5urrDXmAuvgrlod55PEQcvftaiaZZb9X9XA~OL-PN0fo1WBOF7hX4LvAioZc4V7lyIn6Xk3u0Y5q5wWqkF6hncj2ixpnDq9FarnKlNI5SKU94ASmrSKdg__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
+        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14912931/48242352.mp4?Expires=1492273966&Signature=dplf2ubbWD2n3qkAFg~IhRP6yahOuk7keO4arIx~080qiCoD7tyFP1DZarvkeuURH-f4WnoNMpILJ~9aokLaTbQLJwQUfx2tIDskqcHz3pBkS8hL935j-meqhB1B391RH5r-UkiVKM~FRs2IQUdr3t4yYRIBdQWWB-QNcGMgSNgBaCTk670I-WjQfWgBD3Y1ip9naG6Daq6tV7L5qU4-qHtGPyxmU8jIbDOE0814Fxk-~r6o-rJJMdApWRqxDH3mDttMGW8dIfG9PGuzduYT7RE8jZ-Xq81hEdRJdlk--EOk5JRB0Fqn8dokrnqw-PkP7hOrpgrRdwHuj5DrZLUsaA__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
         
         if let url = URL(string: urlString) {
-            let player = AVPlayer(url: url)
+            player = AVPlayer(url: url)
             
             let playerLayer = AVPlayerLayer(player: player)
             self.layer.addSublayer(playerLayer)
             playerLayer.frame = self.frame
             
-            player.play()
+            player?.play()
             
-            player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         }
     }
     
@@ -61,6 +103,8 @@ class VideoPlayerView : UIView {
         if keyPath == "currentItem.loadedTimeRanges" {
             activityIndicatorView.stopAnimating()
             controlsContainerView.backgroundColor = .clear
+            pausePlayButton.isHidden = false
+            isPlaying = true
         }
     }
     
