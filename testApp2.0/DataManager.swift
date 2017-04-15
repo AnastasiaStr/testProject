@@ -16,7 +16,6 @@ class DataManager {
     private let logoutUrl = "https://api.vid.me/auth/delete"
     private let getFeaturedUrl = "https://api.vid.me/videos/featured"
     private let getNewUrl = "https://api.vid.me/videos/new"
-
     
     private init() {}
     static let instance = DataManager()
@@ -51,6 +50,8 @@ class DataManager {
             }
         }
     }
+    
+
     
     
     func login(login: String, password: String) {

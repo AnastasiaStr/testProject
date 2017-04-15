@@ -20,6 +20,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var count = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,14 +51,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @objc private func update () {
-        DataManager.instance.getVideo(amount: 0)
+         DataManager.instance.getVideo(amount: 0)
         //HUD.show(.progress)
         refresher.endRefreshing()
         
     }
     
     private func loadMore() {
-        DataManager.instance.getVideo(amount: currVideos.count)
+         DataManager.instance.getVideo(amount: currVideos.count)
     }
     
 
@@ -76,10 +77,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.myImage?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image2"))
             let likes = currVideos[indexPath.row].likesCount
             cell.likesLabel.text = String(likes)
-                
+            cell.nameLabel.text = currVideos[indexPath.row].title
+                           
         }
         
-        if indexPath.row == currVideos.count - 1 {
+        if indexPath.row == currVideos.count - 2 {
            loadMore()
         }
         
@@ -106,10 +108,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let url = currVideos[indexPath.row].url
         let videoVC = VideoViewController()
+        videoVC.showVideo()
         videoVC.fullVideoURL = url
         
-        navigationController?.pushViewController(videoVC, animated: true)
+        //navigationController?.pushViewController(videoVC, animated: true)
+        
+        print ("alalala")
+      
     }
+    
+    
  
   
 }

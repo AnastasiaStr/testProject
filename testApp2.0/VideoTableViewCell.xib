@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -60,8 +60,11 @@
                     <constraint firstAttribute="trailing" secondItem="MRN-RU-HGE" secondAttribute="trailing" id="0Qn-Rr-MLW"/>
                     <constraint firstItem="M7n-CM-Q6W" firstAttribute="top" secondItem="MRN-RU-HGE" secondAttribute="bottom" constant="8.5" id="1ir-Tb-fp8"/>
                     <constraint firstItem="Nz1-e0-xlg" firstAttribute="top" secondItem="MRN-RU-HGE" secondAttribute="bottom" constant="10" id="6lN-V7-CCP"/>
+                    <constraint firstItem="MRN-RU-HGE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="C3P-C0-lF8"/>
                     <constraint firstItem="Nz1-e0-xlg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="IIQ-fV-MyN"/>
+                    <constraint firstItem="MRN-RU-HGE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IrX-tP-r4T"/>
                     <constraint firstItem="M7n-CM-Q6W" firstAttribute="leading" secondItem="Nz1-e0-xlg" secondAttribute="trailing" constant="8" id="PHh-mO-11s"/>
+                    <constraint firstAttribute="trailing" secondItem="MRN-RU-HGE" secondAttribute="trailing" id="Srq-z9-0gx"/>
                     <constraint firstItem="MRN-RU-HGE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TjU-eI-c6k"/>
                     <constraint firstAttribute="bottomMargin" secondItem="M7n-CM-Q6W" secondAttribute="bottom" constant="4.5" id="XcW-K5-XeB"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Nz1-e0-xlg" secondAttribute="bottom" constant="10" id="ZVd-hY-mgY"/>
