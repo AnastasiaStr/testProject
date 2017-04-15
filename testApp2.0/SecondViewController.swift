@@ -109,7 +109,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let url = currVideos[indexPath.row].url
         let videoVC = VideoViewController()
         videoVC.showVideo()
-        videoVC.fullVideoURL = url
+        //videoVC.fullVideoURL = url
         
         //navigationController?.pushViewController(videoVC, animated: true)
         
