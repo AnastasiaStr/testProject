@@ -149,7 +149,7 @@ class VideoPlayerView : UIView {
     var player: AVPlayer?
     
     func setupPlayerView () {
-        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14908695/48221655.mp4?Expires=1492281609&Signature=A3b0FejDMEHiK01J2uPjK0kupt~CTmxW~3~DFw4myzEkEqqRO3BvCBvL9OZrqQKjPPgd9YbdAAKMklTgZFLKRI-oBF4NEY43bYF42H-ftJA4EPLwXO-ZEyGbp-e102w0NiUkF6wujCXLeVbMW7r-axs5FkhHP8-TmvfVB990nu51b7l2PZhJ2EICy0hCFMx-9JsR3Ob-a-CAVBNawIAHDyQlEuEGeeqZUZXccx68lTOwoBnlZ4ZNEU3aJ62hLpcqBwFPrPR77a0lFRdrti8fs3vcI2QOR5nmi~uq2d4nLA8tlFNjfQlwBph5X2PNtuaMiza4W6Jj~vbBBQViY9zKWA__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
+        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14922318/48292782.mp4?Expires=1492296063&Signature=m6Y8Vxbv1L90IZcluOHJm0k5Pp3QMoOHs3anTMWgD4AXSKa5VQeBusLgfF2pz9PFdOqRqHE0PqkzxeqKXy0EXY3a66kDXJB33w-3tBddth7148nox36~nvFUNuc2dW5FH4Y1uaIZQsfZHRQYlxLyjvx0iohAWHH8lCKL9aibRniguJxyY-QvAbRcdNwDiZLmxMz80vUqmyPEmQh5bPOoSqcK7c~WZfOjwr-RmmXGxYa6annEopd2SGvSX3KoH52yVrcfOXhMm8PceoOZfV-R73M3~km5Y-EG8i90sU3hlKRK6iArpyKFQP3lyBScw85tmpLea7--By4X5MWJOtizdQ__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
         
         if let url = URL(string: urlString) {
             player = AVPlayer(url: url)
@@ -161,7 +161,23 @@ class VideoPlayerView : UIView {
             player?.play()
             
             player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-            //player?.addPeriodicTimeObserver(forInterval: <#T##CMTime#>, queue: <#T##DispatchQueue?#>, using: <#T##(CMTime) -> Void#>)
+            
+            let interval = CMTime(value: 1, timescale: 2)
+            player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
+                
+                let seconds = CMTimeGetSeconds(progressTime)
+                let secondsString = String(format: "%02d", Int(seconds) % 60)
+                let minutesString = String(format: "%02d", Int(seconds) / 60)
+
+                self.currentTimeLabel.text = "\(minutesString):\(secondsString)"
+                
+                if let duration = self.player?.currentItem?.duration {
+                    let durationSeconds = CMTimeGetSeconds(duration)
+                    
+                    self.videoSlider.value = Float(seconds/durationSeconds)
+                    
+                }
+            })
         }
     }
     
