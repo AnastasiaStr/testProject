@@ -57,7 +57,7 @@ class DataManager {
     func getFeatured(amount: Int) {
         let params: [String : Any] = ["offset" : amount, "limit" : 10]
         
-        Alamofire.request(getNewUrl, method: .get, parameters: params).responseJSON { response in
+        Alamofire.request(getFeaturedUrl, method: .get, parameters: params).responseJSON { response in
             let result = JSON(response.result.value as Any)
             let videosJson = result["videos"].arrayValue
             
