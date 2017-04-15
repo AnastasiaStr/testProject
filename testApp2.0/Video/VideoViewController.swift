@@ -24,21 +24,49 @@ class VideoPlayerView : UIView {
         label.text = "00:00"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .right
         return label
     }()
     
-    let videoSlider : UISlider = {
+    let currentTimeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.white
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        label.textAlignment = .right
+        return label
+    }()
+
+    
+    lazy var videoSlider : UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.minimumTrackTintColor = UIColor(red: 0.98, green: 0.15, blue: 0.3, alpha: 1)
+        slider.maximumTrackTintColor = .white
         slider.setThumbImage(UIImage(named: "slider"), for: .normal)
+        
+        slider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
 
         return slider
     }()
     
-    let pausePlayButton : UIButton = {
+    func handleSliderChange () {
+        
+        
+        if let duration = player?.currentItem?.duration {
+            let totalSeconds = CMTimeGetSeconds(duration)
+            let value = Float64(videoSlider.value) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+                
+            })
+
+        }
+    }
+    
+    lazy var pausePlayButton : UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "pause")
         button.setImage(image, for: .normal)
@@ -80,6 +108,7 @@ class VideoPlayerView : UIView {
         super.init(frame: frame)
         
         setupPlayerView()
+        setupGradientLayer()
         backgroundColor = .black
         controlsContainerView.frame = frame
         addSubview(controlsContainerView)
@@ -97,14 +126,20 @@ class VideoPlayerView : UIView {
         
         controlsContainerView.addSubview(videoLenghtLabel)
         videoLenghtLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-        videoLenghtLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoLenghtLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        videoLenghtLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        videoLenghtLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         videoLenghtLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        controlsContainerView.addSubview(currentTimeLabel)
+        currentTimeLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        currentTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        currentTimeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        currentTimeLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         controlsContainerView.addSubview(videoSlider)
         videoSlider.rightAnchor.constraint(equalTo: videoLenghtLabel.leftAnchor).isActive = true
         videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoSlider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        videoSlider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor, constant: 8).isActive = true
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
         
@@ -114,7 +149,7 @@ class VideoPlayerView : UIView {
     var player: AVPlayer?
     
     func setupPlayerView () {
-        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14912931/48242352.mp4?Expires=1492273966&Signature=dplf2ubbWD2n3qkAFg~IhRP6yahOuk7keO4arIx~080qiCoD7tyFP1DZarvkeuURH-f4WnoNMpILJ~9aokLaTbQLJwQUfx2tIDskqcHz3pBkS8hL935j-meqhB1B391RH5r-UkiVKM~FRs2IQUdr3t4yYRIBdQWWB-QNcGMgSNgBaCTk670I-WjQfWgBD3Y1ip9naG6Daq6tV7L5qU4-qHtGPyxmU8jIbDOE0814Fxk-~r6o-rJJMdApWRqxDH3mDttMGW8dIfG9PGuzduYT7RE8jZ-Xq81hEdRJdlk--EOk5JRB0Fqn8dokrnqw-PkP7hOrpgrRdwHuj5DrZLUsaA__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
+        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14908695/48221655.mp4?Expires=1492281609&Signature=A3b0FejDMEHiK01J2uPjK0kupt~CTmxW~3~DFw4myzEkEqqRO3BvCBvL9OZrqQKjPPgd9YbdAAKMklTgZFLKRI-oBF4NEY43bYF42H-ftJA4EPLwXO-ZEyGbp-e102w0NiUkF6wujCXLeVbMW7r-axs5FkhHP8-TmvfVB990nu51b7l2PZhJ2EICy0hCFMx-9JsR3Ob-a-CAVBNawIAHDyQlEuEGeeqZUZXccx68lTOwoBnlZ4ZNEU3aJ62hLpcqBwFPrPR77a0lFRdrti8fs3vcI2QOR5nmi~uq2d4nLA8tlFNjfQlwBph5X2PNtuaMiza4W6Jj~vbBBQViY9zKWA__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
         
         if let url = URL(string: urlString) {
             player = AVPlayer(url: url)
@@ -126,6 +161,7 @@ class VideoPlayerView : UIView {
             player?.play()
             
             player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            player?.addPeriodicTimeObserver(forInterval: <#T##CMTime#>, queue: <#T##DispatchQueue?#>, using: <#T##(CMTime) -> Void#>)
         }
     }
     
@@ -135,7 +171,24 @@ class VideoPlayerView : UIView {
             controlsContainerView.backgroundColor = .clear
             pausePlayButton.isHidden = false
             isPlaying = true
+            
+            if let duration = player?.currentItem?.duration {
+                let seconds = CMTimeGetSeconds(duration)
+                let secondsText = String(format: "%02d", Int(seconds) % 60)
+                let minutesText = String(format: "%02d", Int(seconds) / 60)
+                videoLenghtLabel.text = "\(minutesText):\(secondsText)"
+            }
         }
+    }
+    
+    private func setupGradientLayer () {
+        let gradientLayer = CAGradientLayer()
+        
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.7, 1.2]
+        controlsContainerView.layer.addSublayer(gradientLayer)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
