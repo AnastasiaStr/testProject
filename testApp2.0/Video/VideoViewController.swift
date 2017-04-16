@@ -13,7 +13,7 @@ import AVFoundation
 class VideoPlayerView : UIView {
     
     var function : ()->() = {}
-    РАБОТАЕТЬ БЛЯДЬ ХОХОХОХОХОХОХОХОахахххахаххахахахаххахаlazy var closeButton : UIButton = {
+    lazy var closeButton : UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "close")
         button.setImage(image, for: .normal)
@@ -24,7 +24,7 @@ class VideoPlayerView : UIView {
     }()
     
     func handleClose (sender : UIButton) {
-        print ("fuck")
+        player?.replaceCurrentItem(with: nil)
         function()
     }
     
@@ -148,7 +148,6 @@ class VideoPlayerView : UIView {
         pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         controlsContainerView.addSubview(closeButton)
-        //closeButton.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
         closeButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         closeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
@@ -178,6 +177,8 @@ class VideoPlayerView : UIView {
     
     var player: AVPlayer?
     
+    var playerLayer = AVPlayerLayer()
+    
     var videoUrl: String?
     
     func setupPlayerView (url: String) {
@@ -186,7 +187,7 @@ class VideoPlayerView : UIView {
         if let url = URL(string: urlString) {
             player = AVPlayer(url: url)
             
-            let playerLayer = AVPlayerLayer(player: player)
+            playerLayer = AVPlayerLayer(player: player)
             self.layer.addSublayer(playerLayer)
             playerLayer.frame = self.frame
             
@@ -246,23 +247,6 @@ class VideoPlayerView : UIView {
     
 }
 
-class ActionButton: UIButton {
-    var touchUp: ((_ button: UIButton) -> ())?
-    
-    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:)") }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupButton()
-    }
-    func setupButton() {
-        addTarget(self, action: #selector(getter: touchUp), for: .touchUpInside)
-    }
-    
-    func touchUp(sender: UIButton) {
-        touchUp?(sender)
-    }
-}
-
 class VideoViewController: UIView {
 
     var fullVideoURL: String?
@@ -302,13 +286,25 @@ class VideoViewController: UIView {
     }()*/
     
     func deleteScreen () {
+        if let keyWindow = UIApplication.shared.keyWindow {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+            self.view.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 10, width: 10, height: 10)
+
+        }, completion: { (completedAnimation) in
+            self.view.removeFromSuperview()
+            self.removeFromSuperview()
+        })
+  
         print ("keklol")
+        }
     }
+    
+    var view = UIView()
     
     func showVideo() {
         
         if let keyWindow = UIApplication.shared.keyWindow {
-            let view = UIView(frame: keyWindow.frame)
+            view = UIView(frame: keyWindow.frame)
             view.backgroundColor = UIColor.white
             print ("azaza")
             
@@ -332,9 +328,9 @@ class VideoViewController: UIView {
             
             keyWindow.addSubview(view)
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-            view.frame = keyWindow.frame
+            self.view.frame = keyWindow.frame
             }, completion: { (completedAnimation) in
-                                //print(videoPlayerView.currentTimeLabel.text as Any)
+                //hide fucking ststus bar
             })
         }
     }
