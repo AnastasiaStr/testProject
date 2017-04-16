@@ -293,8 +293,11 @@ class VideoViewController: UIView {
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textAlignment = .left
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
         return label
     }()
     
@@ -303,7 +306,7 @@ class VideoViewController: UIView {
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.textAlignment = .left
         return label
     }()
@@ -315,6 +318,9 @@ class VideoViewController: UIView {
         label.textColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
+        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.00001
         return label
     }()
     
@@ -355,13 +361,13 @@ class VideoViewController: UIView {
             titleLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 13).isActive = true
             titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -100).isActive = true
 
-            titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
             likesCountLabel.text = String(likes)
             view.addSubview(likesCountLabel)
             likesCountLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
-            likesCountLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 13).isActive = true
-            likesCountLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            likesCountLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+            likesCountLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
             
             likesCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
@@ -370,11 +376,11 @@ class VideoViewController: UIView {
             descLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
             descLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
             descLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-            //descLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 8).isActive = true
+            descLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8).isActive = true
             
             view.addSubview(likeButton)
             likeButton.rightAnchor.constraint(equalTo: likesCountLabel.leftAnchor, constant: -8).isActive = true
-            likeButton.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 10).isActive = true
+            likeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
             likeButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
             likeButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
 
