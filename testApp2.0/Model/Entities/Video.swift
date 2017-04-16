@@ -35,7 +35,7 @@ extension Video {
         self.id = videoId
         self.url = url.replacingOccurrences(of: "\\", with: "")
         self.title = title
-        self.description = description.replacingOccurrences(of: "\\r", with: "S")
+        self.description = description
         self.likesCount = likesCount
         self.thumbnailUrl = thumbnailUrl.replacingOccurrences(of: "\\", with: "")
         self.height = height

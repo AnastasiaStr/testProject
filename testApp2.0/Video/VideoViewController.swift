@@ -13,6 +13,7 @@ import AVFoundation
 class VideoPlayerView : UIView {
     
     var function : ()->() = {}
+    
     lazy var closeButton : UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "close")
@@ -20,6 +21,7 @@ class VideoPlayerView : UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
         button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleClose), for: .touchDragExit)
         return button
     }()
     
@@ -153,8 +155,6 @@ class VideoPlayerView : UIView {
         closeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         closeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
 
-        
-        
         controlsContainerView.addSubview(videoLenghtLabel)
         videoLenghtLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
         videoLenghtLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
@@ -250,10 +250,43 @@ class VideoPlayerView : UIView {
 class VideoViewController: UIView {
 
     var fullVideoURL: String?
-    var likes: Int?
+    var likes = 0
     var title: String?
     var desc: String?
-
+    
+    
+    var isLiked = true
+    
+    lazy var likeButton : UIButton = {
+        let button = UIButton(type: .system)
+        var image = UIImage()
+        if self.isLiked {
+            image = UIImage(named: "like")!
+            button.tintColor = UIColor(red: 0.98, green: 0.15, blue: 0.3, alpha: 1)
+        } else {
+            image = UIImage(named: "no_like")!
+            button.tintColor = .black
+        }
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    func handleLike (sender : UIButton) {
+        print ("olololo")
+        var image = UIImage()
+        if isLiked {
+            image = UIImage(named: "no_like")!
+            likeButton.tintColor = .black
+        } else {
+            image = UIImage(named: "like")!
+            likeButton.tintColor = UIColor(red: 0.98, green: 0.15, blue: 0.3, alpha: 1)
+        }
+        likeButton.setImage(image, for: .normal)
+        isLiked = !isLiked
+    }
     
     let titleLabel : UILabel = {
         let label = UILabel()
@@ -265,7 +298,7 @@ class VideoViewController: UIView {
         return label
     }()
     
-   /* let likesCountLabel : UILabel = {
+   let likesCountLabel : UILabel = {
         let label = UILabel()
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -283,7 +316,7 @@ class VideoViewController: UIView {
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
         return label
-    }()*/
+    }()
     
     func deleteScreen () {
         if let keyWindow = UIApplication.shared.keyWindow {
@@ -319,12 +352,32 @@ class VideoViewController: UIView {
             titleLabel.text = title
             view.addSubview(titleLabel)
             titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-            titleLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 8).isActive = true
-            //titleLabel.rightAnchor.constraint(equalTo: likesCountLabel.rightAnchor).isActive = true
+            titleLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 13).isActive = true
+            titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -100).isActive = true
 
             titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
+            likesCountLabel.text = String(likes)
+            view.addSubview(likesCountLabel)
+            likesCountLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+            likesCountLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 13).isActive = true
+            likesCountLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
             
+            likesCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            
+            descLabel.text = desc
+            view.addSubview(descLabel)
+            descLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+            descLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+            descLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+            //descLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 8).isActive = true
+            
+            view.addSubview(likeButton)
+            likeButton.rightAnchor.constraint(equalTo: likesCountLabel.leftAnchor, constant: -8).isActive = true
+            likeButton.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 10).isActive = true
+            likeButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            likeButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
             
             keyWindow.addSubview(view)
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
