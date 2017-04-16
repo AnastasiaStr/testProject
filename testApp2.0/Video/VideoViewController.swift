@@ -86,8 +86,8 @@ class VideoPlayerView : UIView {
     
     lazy var pausePlayButton : UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(named: "pause")
-        button.setImage(image, for: .normal)
+        //let image = UIImage(named: "pause")
+        //button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
         button.isHidden = true
@@ -104,10 +104,8 @@ class VideoPlayerView : UIView {
         
         if isPlaying {
             player?.pause()
-            pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
         } else {
             player?.play()
-            pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
         }
         
         
@@ -146,9 +144,9 @@ class VideoPlayerView : UIView {
         controlsContainerView.addSubview(pausePlayButton)
         pausePlayButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         pausePlayButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        pausePlayButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
+        pausePlayButton.widthAnchor.constraint(equalTo: controlsContainerView.widthAnchor).isActive = true
+        pausePlayButton.heightAnchor.constraint(equalTo: controlsContainerView.heightAnchor).isActive = true
+      
         controlsContainerView.addSubview(closeButton)
         closeButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
@@ -389,7 +387,7 @@ class VideoViewController: UIView {
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
             self.view.frame = keyWindow.frame
             }, completion: { (completedAnimation) in
-                //hide fucking ststus bar
+                UIApplication.shared.isStatusBarHidden = true
             })
         }
     }
