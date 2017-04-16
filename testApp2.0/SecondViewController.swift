@@ -40,6 +40,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         NotificationCenter.default.addObserver(self, selector: #selector(didFailGetVideo(_:)), name: .DidFailGetVideo, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(gotVideo(_:)), name: .GotVideo, object: nil)
+        
 
         
     }
@@ -95,6 +96,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return CGFloat(result)
     
     }
+    
+
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

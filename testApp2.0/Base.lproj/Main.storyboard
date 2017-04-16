@@ -200,7 +200,7 @@
     <resources>
         <image name="featured_image" width="32" height="32"/>
         <image name="feed_image" width="32" height="32"/>
-        <image name="login_button" width="460" height="73"/>
+        <image name="login_button" width="230" height="36"/>
         <image name="new_image" width="32" height="32"/>
     </resources>
 </document>

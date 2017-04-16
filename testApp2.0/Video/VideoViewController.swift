@@ -35,7 +35,7 @@ class VideoPlayerView : UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.white
         label.font = UIFont.boldSystemFont(ofSize: 13)
-        label.textAlignment = .right
+        label.textAlignment = .left
         return label
     }()
 
@@ -79,6 +79,36 @@ class VideoPlayerView : UIView {
         return button
     }()
     
+   /* lazy var close : UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "close")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
+        button.isHidden = true
+        
+        button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    func handleClose () {
+        
+        if isPlaying {
+            player?.pause()
+            pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
+        } else {
+            player?.play()
+            pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
+        }
+        
+        isPlaying = !isPlaying
+        
+        
+    }*/
+    
+    
+    
     var isPlaying = false
     
     func handlePause () {
@@ -104,10 +134,14 @@ class VideoPlayerView : UIView {
         return view
     }()
     
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setupPlayerView()
+    }
+    
+    func start (url: String, frame: CGRect) {
+        setupPlayerView(url: url)
         setupGradientLayer()
         backgroundColor = .black
         controlsContainerView.frame = frame
@@ -116,13 +150,16 @@ class VideoPlayerView : UIView {
         controlsContainerView.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-       
+        
         
         controlsContainerView.addSubview(pausePlayButton)
         pausePlayButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         pausePlayButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         pausePlayButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
         pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        
+        
         
         controlsContainerView.addSubview(videoLenghtLabel)
         videoLenghtLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
@@ -131,7 +168,7 @@ class VideoPlayerView : UIView {
         videoLenghtLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         controlsContainerView.addSubview(currentTimeLabel)
-        currentTimeLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        currentTimeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         currentTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
         currentTimeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         currentTimeLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
@@ -139,17 +176,16 @@ class VideoPlayerView : UIView {
         controlsContainerView.addSubview(videoSlider)
         videoSlider.rightAnchor.constraint(equalTo: videoLenghtLabel.leftAnchor).isActive = true
         videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoSlider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor, constant: 8).isActive = true
+        videoSlider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor).isActive = true
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
-
-        
-
     }
     
     var player: AVPlayer?
     
-    func setupPlayerView () {
-        let urlString = "https://d1wst0behutosd.cloudfront.net/videos/14922318/48292782.mp4?Expires=1492296063&Signature=m6Y8Vxbv1L90IZcluOHJm0k5Pp3QMoOHs3anTMWgD4AXSKa5VQeBusLgfF2pz9PFdOqRqHE0PqkzxeqKXy0EXY3a66kDXJB33w-3tBddth7148nox36~nvFUNuc2dW5FH4Y1uaIZQsfZHRQYlxLyjvx0iohAWHH8lCKL9aibRniguJxyY-QvAbRcdNwDiZLmxMz80vUqmyPEmQh5bPOoSqcK7c~WZfOjwr-RmmXGxYa6annEopd2SGvSX3KoH52yVrcfOXhMm8PceoOZfV-R73M3~km5Y-EG8i90sU3hlKRK6iArpyKFQP3lyBScw85tmpLea7--By4X5MWJOtizdQ__&Key-Pair-Id=APKAJJ6WELAPEP47UKWQ"
+    var videoUrl: String?
+    
+    func setupPlayerView (url: String) {
+        let urlString = url
         
         if let url = URL(string: urlString) {
             player = AVPlayer(url: url)
@@ -230,33 +266,18 @@ class VideoViewController: NSObject {
             let height = keyWindow.frame.width * 9 / 16
             let videoPlayerFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
             let videoPlayerView = VideoPlayerView.init(frame: videoPlayerFrame)
+            videoPlayerView.start(url: fullVideoURL!, frame: videoPlayerFrame)
             view.addSubview(videoPlayerView)
             
-            keyWindow.addSubview(view)
+            //view.addSubview(closeButton)
+
             
-    
+            keyWindow.addSubview(view)
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
                 view.frame = keyWindow.frame
             }, completion: { (completedAnimation) in
                 UIApplication.shared.setStatusBarHidden(true, with: .fade)
             })
         }
-    
-        
-        
-       /* let videoURL = NSURL(string: fullVideoURL!)
-       
-        
-        let player = AVPlayer(url: videoURL! as URL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        
-        
-        self.present(playerViewController, animated: true) {
-            playerViewController.player!.play()
-        }*/
     }
-    
 }
-    
-
