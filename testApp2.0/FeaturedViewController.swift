@@ -110,7 +110,11 @@ extension FeaturedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let url = currVideos[indexPath.row].url
         let videoVC = VideoViewController()
+        
         videoVC.fullVideoURL = url
+        videoVC.likes = currVideos[indexPath.row].likesCount
+        videoVC.title = currVideos[indexPath.row].title
+        videoVC.desc = currVideos[indexPath.row].description
         videoVC.showVideo()
 
         

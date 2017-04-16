@@ -13,6 +13,7 @@ struct Video {
     let id: String
     let url: String
     let title: String
+    let description: String
     let likesCount: Int
     let thumbnailUrl: String
     let height: Double
@@ -25,6 +26,7 @@ extension Video {
         guard let videoId = json["video_id"].string,
             let url = json["complete_url"].string,
             let title = json["title"].string,
+            let description = json["description"].string,
             let likesCount = json["likes_count"].int,
             let thumbnailUrl = json["thumbnail_url"].string,
             let height = json["height"].double,
@@ -33,6 +35,7 @@ extension Video {
         self.id = videoId
         self.url = url.replacingOccurrences(of: "\\", with: "")
         self.title = title
+        self.description = description
         self.likesCount = likesCount
         self.thumbnailUrl = thumbnailUrl.replacingOccurrences(of: "\\", with: "")
         self.height = height

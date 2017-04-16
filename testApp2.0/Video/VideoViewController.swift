@@ -79,35 +79,6 @@ class VideoPlayerView : UIView {
         return button
     }()
     
-   /* lazy var close : UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(named: "close")
-        button.setImage(image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .white
-        button.isHidden = true
-        
-        button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    func handleClose () {
-        
-        if isPlaying {
-            player?.pause()
-            pausePlayButton.setImage(UIImage(named: "play"), for: .normal)
-        } else {
-            player?.play()
-            pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
-        }
-        
-        isPlaying = !isPlaying
-        
-        
-    }*/
-    
-    
     
     var isPlaying = false
     
@@ -253,6 +224,38 @@ class VideoPlayerView : UIView {
 class VideoViewController: NSObject {
 
     var fullVideoURL: String?
+    var likes: Int?
+    var title: String?
+    var desc: String?
+    
+    lazy var closeButton : UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "close")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
+        button.isHidden = true
+     
+        button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
+     
+        return button
+    }()
+     
+    func handleClose () {
+     
+
+     
+    }
+    
+    let titleLabel : UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.black
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textAlignment = .left
+        return label
+    }()
     
     func showVideo() {
         
@@ -269,7 +272,19 @@ class VideoViewController: NSObject {
             videoPlayerView.start(url: fullVideoURL!, frame: videoPlayerFrame)
             view.addSubview(videoPlayerView)
             
-            //view.addSubview(closeButton)
+            titleLabel.text = title
+            view.addSubview(titleLabel)
+            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+            titleLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 8).isActive = true
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor)
+            
+            view.addSubview(closeButton)
+            closeButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
+            closeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            closeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            
+
 
             
             keyWindow.addSubview(view)
@@ -277,6 +292,7 @@ class VideoViewController: NSObject {
                 view.frame = keyWindow.frame
             }, completion: { (completedAnimation) in
                 UIApplication.shared.setStatusBarHidden(true, with: .fade)
+                self.closeButton.isHidden = false
             })
         }
     }
