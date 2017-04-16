@@ -12,6 +12,22 @@ import AVFoundation
 
 class VideoPlayerView : UIView {
     
+    var function : ()->() = {}
+    РАБОТАЕТЬ БЛЯДЬ ХОХОХОХОХОХОХОХОахахххахаххахахахаххахаlazy var closeButton : UIButton = {
+        let button = UIButton(type: .system)
+        let image = UIImage(named: "close")
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
+        return button
+    }()
+    
+    func handleClose (sender : UIButton) {
+        print ("fuck")
+        function()
+    }
+    
     let activityIndicatorView : UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +96,7 @@ class VideoPlayerView : UIView {
     }()
     
     
-    var isPlaying = false
+    var isPlaying = true
     
     func handlePause () {
         
@@ -107,11 +123,13 @@ class VideoPlayerView : UIView {
     
     
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    func start (url: String, frame: CGRect) {
+    func start (url: String, frame: CGRect, function: @escaping ()->()) {
+        self.function = function
         setupPlayerView(url: url)
         setupGradientLayer()
         backgroundColor = .black
@@ -129,7 +147,13 @@ class VideoPlayerView : UIView {
         pausePlayButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
         pausePlayButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        
+        controlsContainerView.addSubview(closeButton)
+        //closeButton.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
+        closeButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        closeButton.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        closeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
         
         
         controlsContainerView.addSubview(videoLenghtLabel)
@@ -149,6 +173,7 @@ class VideoPlayerView : UIView {
         videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         videoSlider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor).isActive = true
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
     }
     
     var player: AVPlayer?
@@ -193,7 +218,6 @@ class VideoPlayerView : UIView {
             activityIndicatorView.stopAnimating()
             controlsContainerView.backgroundColor = .clear
             pausePlayButton.isHidden = false
-            isPlaying = true
             
             if let duration = player?.currentItem?.duration {
                 let seconds = CMTimeGetSeconds(duration)
@@ -214,6 +238,7 @@ class VideoPlayerView : UIView {
         
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -221,33 +246,52 @@ class VideoPlayerView : UIView {
     
 }
 
-class VideoViewController: NSObject {
+class ActionButton: UIButton {
+    var touchUp: ((_ button: UIButton) -> ())?
+    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:)") }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupButton()
+    }
+    func setupButton() {
+        addTarget(self, action: #selector(getter: touchUp), for: .touchUpInside)
+    }
+    
+    func touchUp(sender: UIButton) {
+        touchUp?(sender)
+    }
+}
+
+class VideoViewController: UIView {
 
     var fullVideoURL: String?
     var likes: Int?
     var title: String?
     var desc: String?
-    
-    lazy var closeButton : UIButton = {
-        let button = UIButton(type: .system)
-        let image = UIImage(named: "close")
-        button.setImage(image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .white
-        button.isHidden = true
-     
-        button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
-     
-        return button
-    }()
-     
-    func handleClose () {
-     
 
-     
-    }
     
     let titleLabel : UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.black
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .left
+        return label
+    }()
+    
+   /* let likesCountLabel : UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor.black
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    let descLabel : UILabel = {
         let label = UILabel()
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -255,7 +299,11 @@ class VideoViewController: NSObject {
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
         return label
-    }()
+    }()*/
+    
+    func deleteScreen () {
+        print ("keklol")
+    }
     
     func showVideo() {
         
@@ -269,31 +317,27 @@ class VideoViewController: NSObject {
             let height = keyWindow.frame.width * 9 / 16
             let videoPlayerFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
             let videoPlayerView = VideoPlayerView.init(frame: videoPlayerFrame)
-            videoPlayerView.start(url: fullVideoURL!, frame: videoPlayerFrame)
+            videoPlayerView.start(url: fullVideoURL!, frame: videoPlayerFrame, function: deleteScreen)
             view.addSubview(videoPlayerView)
             
             titleLabel.text = title
             view.addSubview(titleLabel)
             titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
             titleLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 8).isActive = true
-            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor)
-            
-            view.addSubview(closeButton)
-            closeButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
-            closeButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            closeButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            
+            //titleLabel.rightAnchor.constraint(equalTo: likesCountLabel.rightAnchor).isActive = true
 
+            titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
+            
             
             keyWindow.addSubview(view)
             UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-                view.frame = keyWindow.frame
+            view.frame = keyWindow.frame
             }, completion: { (completedAnimation) in
-                UIApplication.shared.setStatusBarHidden(true, with: .fade)
-                self.closeButton.isHidden = false
+                                //print(videoPlayerView.currentTimeLabel.text as Any)
             })
         }
     }
+    
+
 }

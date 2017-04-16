@@ -116,10 +116,7 @@ extension FeaturedViewController: UITableViewDelegate, UITableViewDataSource {
         videoVC.title = currVideos[indexPath.row].title
         videoVC.desc = currVideos[indexPath.row].description
         videoVC.showVideo()
-
-        
     }
-    
 }
 
 
