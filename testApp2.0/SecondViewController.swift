@@ -49,8 +49,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     @objc private func update () {
-         DataManager.instance.getVideo(amount: 0)
-        //HUD.show(.progress)
+        DataManager.instance.getVideo(amount: 0)
         refresher.endRefreshing()
         
     }
@@ -66,7 +65,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.row)
+
         
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
     

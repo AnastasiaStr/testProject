@@ -94,7 +94,6 @@ extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.row)
         
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         
