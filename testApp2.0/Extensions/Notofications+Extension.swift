@@ -2,7 +2,7 @@
 //  Notofications+Extension.swift
 //  testApp2.0
 //
-//  Created by Alexander Kravchenko on 12.04.17.
+//  Created by Anastasia on 12.04.17.
 //  Copyright © 2017 Anastasia. All rights reserved.
 //
 
