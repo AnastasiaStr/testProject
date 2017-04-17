@@ -20,8 +20,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     var urlArray:[String] = ["https://d1wst0behutosd.cloudfront.net/thumbnails/14818578.jpg?v1r1491791023", "https://d1wst0behutosd.cloudfront.net/thumbnails/14861286.jpg?v1r1491945878"]
     var refresher: UIRefreshControl!
     
-    var userExists = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         logoutButton.isHidden = true

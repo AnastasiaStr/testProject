@@ -23,7 +23,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
         DataManager.instance.getVideo(amount: 0)
-        HUD.show(.progress)
+        HUD.showProgress()
         
         myTable.delegate = self
         myTable.dataSource = self

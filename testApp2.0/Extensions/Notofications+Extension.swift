@@ -22,5 +22,7 @@ extension Notification.Name {
     static let GotFeatured = Notification.Name("GotFeatured")
     static let DidFailGetFeatured = Notification.Name("DidFailGetFeatured")
     
+    static let NoInternetConnection = Notification.Name("NoInternetConnection")
+    
     
 }

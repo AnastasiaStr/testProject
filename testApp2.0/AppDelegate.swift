@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         UITabBar.appearance().tintColor = UIColor(red: 0.98, green: 0.15, blue: 0.3, alpha: 1)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(internetNotAvailable(_:)), name: .NoInternetConnection, object: nil)
         
         return true
     }
@@ -43,6 +43,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    //MARK: - Private methods 
+    
+    @objc private func internetNotAvailable(_ notification: Notification) {
+        if let topVC = UIApplication.topViewController() {
+            let title = "Нет соединения с интернетом"
+            let message = "Убедитесь, что устройство подключено к Интернету."
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            topVC.present(alert, animated: true, completion: nil)
+        }
     }
 
 

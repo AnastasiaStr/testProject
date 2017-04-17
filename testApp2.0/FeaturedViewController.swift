@@ -44,10 +44,9 @@ class FeaturedViewController: UIViewController, Alertable {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         if currVideos.isEmpty {
             DataManager.instance.getFeatured(amount: 0)
-            HUD.show(.progress)
+            HUD.showProgress()
         }
     }
     

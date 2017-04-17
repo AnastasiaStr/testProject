@@ -21,6 +21,8 @@
 		5D59E5231E9D490500499577 /* NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D59E5201E9D490500499577 /* NibLoadableView.swift */; };
 		81279EB3EA2C373B48C447F2 /* Pods_testApp2_0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 062ED324036FC1E900FBF802 /* Pods_testApp2_0.framework */; };
 		C80B900E1EA2ACFF00526516 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80B900D1EA2ACFF00526516 /* Utils.swift */; };
+		C84580F01EA4BAF800EC47DE /* UIApplecation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84580EF1EA4BAF800EC47DE /* UIApplecation+Extension.swift */; };
+		C84580F21EA4BCDB00EC47DE /* PKHUD+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C84580F11EA4BCDB00EC47DE /* PKHUD+Extension.swift */; };
 		C85911F11E9EBAEB0099F4E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F01E9EBAEB0099F4E2 /* User.swift */; };
 		C85911F31E9EBCC20099F4E2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F21E9EBCC20099F4E2 /* DataManager.swift */; };
 		C85911F61E9EBD6F0099F4E2 /* Notofications+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */; };
@@ -48,6 +50,8 @@
 		811A4F3EC05CD1B2F2F4183F /* Pods-testApp2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-testApp2.0/Pods-testApp2.0.release.xcconfig"; sourceTree = "<group>"; };
 		C172646C838EC91EBE95D205 /* Pods-testApp2.0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testApp2.0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testApp2.0/Pods-testApp2.0.debug.xcconfig"; sourceTree = "<group>"; };
 		C80B900D1EA2ACFF00526516 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Utils/Utils.swift; sourceTree = "<group>"; };
+		C84580EF1EA4BAF800EC47DE /* UIApplecation+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplecation+Extension.swift"; path = "Extensions/UIApplecation+Extension.swift"; sourceTree = "<group>"; };
+		C84580F11EA4BCDB00EC47DE /* PKHUD+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PKHUD+Extension.swift"; sourceTree = "<group>"; };
 		C85911F01E9EBAEB0099F4E2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/Entities/User.swift; sourceTree = "<group>"; };
 		C85911F21E9EBCC20099F4E2 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Notofications+Extension.swift"; path = "Extensions/Notofications+Extension.swift"; sourceTree = "<group>"; };
@@ -106,7 +110,6 @@
 				5D59E4FE1E9D3B9000499577 /* Main.storyboard */,
 				5D59E5111E9D46BE00499577 /* VideoTableViewCell.xib */,
 				5D59E51C1E9D48CB00499577 /* VideoTableViewCell.swift */,
-				5D59E51E1E9D490500499577 /* UITableView+Extension.swift */,
 				5D59E51F1E9D490500499577 /* ReusableView.swift */,
 				5D59E5201E9D490500499577 /* NibLoadableView.swift */,
 				5D59E4FC1E9D3B9000499577 /* FeaturedViewController.swift */,
@@ -157,7 +160,10 @@
 		C85911F41E9EBD5C0099F4E2 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5D59E51E1E9D490500499577 /* UITableView+Extension.swift */,
 				C85911F51E9EBD6F0099F4E2 /* Notofications+Extension.swift */,
+				C84580EF1EA4BAF800EC47DE /* UIApplecation+Extension.swift */,
+				C84580F11EA4BCDB00EC47DE /* PKHUD+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -311,11 +317,13 @@
 				5D59E4FD1E9D3B9000499577 /* FeaturedViewController.swift in Sources */,
 				C85911F91E9EC26E0099F4E2 /* Alertable.swift in Sources */,
 				5D59E50F1E9D3BFB00499577 /* ThirdViewController.swift in Sources */,
+				C84580F21EA4BCDB00EC47DE /* PKHUD+Extension.swift in Sources */,
 				C898569B1EA225CB00F16839 /* VideoViewController.swift in Sources */,
 				C85911F11E9EBAEB0099F4E2 /* User.swift in Sources */,
 				C8953B1C1EA003F200BBE9D7 /* Video.swift in Sources */,
 				5D59E4FB1E9D3B9000499577 /* AppDelegate.swift in Sources */,
 				5D59E5221E9D490500499577 /* ReusableView.swift in Sources */,
+				C84580F01EA4BAF800EC47DE /* UIApplecation+Extension.swift in Sources */,
 				5D59E5211E9D490500499577 /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

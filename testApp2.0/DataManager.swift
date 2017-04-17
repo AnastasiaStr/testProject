@@ -27,6 +27,12 @@ class DataManager {
     
     
     func getVideo (amount: Int) {
+        
+        guard Utils.isInternetAvailable else {
+            NotificationCenter.default.post(name: .NoInternetConnection, object: nil)
+            return
+        }
+        
         let params: [String : Any] = ["offset" : amount, "limit" : 10]
         
         Alamofire.request(getNewUrl, method: .get, parameters: params).responseJSON { response in
@@ -56,6 +62,12 @@ class DataManager {
     
     
     func getFeatured(amount: Int) {
+        
+        guard Utils.isInternetAvailable else {
+            NotificationCenter.default.post(name: .NoInternetConnection, object: nil)
+            return
+        }
+        
         let params: [String : Any] = ["offset" : amount, "limit" : 10]
         
         Alamofire.request(getFeaturedUrl, method: .get, parameters: params).responseJSON { response in
@@ -85,6 +97,11 @@ class DataManager {
     
     func login(login: String, password: String) {
         
+        guard Utils.isInternetAvailable else {
+            NotificationCenter.default.post(name: .NoInternetConnection, object: nil)
+            return
+        }
+        
         let params: [String : Any] = ["username" : login, "password" : password]
         
         Alamofire.request(loginUrl, method: .post, parameters: params).responseJSON { response in
@@ -103,6 +120,11 @@ class DataManager {
     }
     
     func logout () {
+        
+        guard Utils.isInternetAvailable else {
+            NotificationCenter.default.post(name: .NoInternetConnection, object: nil)
+            return
+        }
         
         let token: [String : Any] = ["token" : currentUser?.token]
         
