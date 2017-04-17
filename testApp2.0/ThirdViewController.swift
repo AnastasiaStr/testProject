@@ -20,6 +20,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     var urlArray:[String] = ["https://d1wst0behutosd.cloudfront.net/thumbnails/14818578.jpg?v1r1491791023", "https://d1wst0behutosd.cloudfront.net/thumbnails/14861286.jpg?v1r1491945878"]
     var refresher: UIRefreshControl!
     
+    
+    fileprivate var currVideos: [Video] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         logoutButton.isHidden = true
@@ -36,6 +39,9 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
         NotificationCenter.default.addObserver(self, selector: #selector(didFailGetUser(_:)), name: .DidFailGetUser, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(logoutComplete(_:)), name: .CompleteLogout, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didFailCompleteLogout(_:)), name: .DidFailCompleteLogout, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didFailGetVideo(_:)), name: .DidFailGetVideo, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(gotVideo(_:)), name: .GotVideo, object: nil)
         
         feedTableView.delegate = self
         feedTableView.dataSource = self
@@ -62,6 +68,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
        if let username = myUsername.text, let password = myPassword.text {
             HUD.show(.progress)
             DataManager.instance.login(login: username, password: password)
+        
         }
         
     }
@@ -73,7 +80,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     
     
     @objc func update () {
-        urlArray.append("https://d1wst0behutosd.cloudfront.net/thumbnails/14832798.jpg?v1r1491836904")
+
         feedTableView.reloadData()
         refresher.endRefreshing()
         
@@ -83,22 +90,55 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
 }
 
 extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-        return urlArray.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currVideos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(indexPath.row)
+        
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         
-        if let url = URL(string: urlArray[indexPath.row]) {
+        if let url = URL(string: currVideos[indexPath.row].thumbnailUrl){
             cell.myImage?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
+            let likes = currVideos[indexPath.row].likesCount
+            cell.likesLabel.text = String(likes)
+            cell.nameLabel.text = currVideos[indexPath.row].title
+            
         }
+        
+        /*if indexPath.row == currVideos.count - 2 {
+            loadMore()
+        }*/
+        
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 274
+        
+        let height = currVideos[indexPath.row].height
+        let width = currVideos[indexPath.row].width
+        let proportion = Double(self.view.bounds.width) / width
+        
+        let result = height * proportion + 10
+        return CGFloat(result)
+        
+    }
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let url = currVideos[indexPath.row].url
+        let videoVC = VideoViewController()
+        
+        videoVC.fullVideoURL = url
+        videoVC.likes = currVideos[indexPath.row].likesCount
+        videoVC.title = currVideos[indexPath.row].title
+        videoVC.desc = currVideos[indexPath.row].description
+        videoVC.showVideo()
     }
     
     
@@ -109,15 +149,16 @@ extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - Notification handlers
 extension ThirdViewController {
     
-
-    
     @objc fileprivate func gotUser(_ notification: Notification) {
-        HUD.hide()
         if let user = DataManager.instance.currentUser {
             loginStack.isHidden = true
             logoutButton.isHidden = false
             feedTableView.isHidden = false
             self.view.endEditing(true)
+            
+            DataManager.instance.getFeed(token: user.token)
+            //HUD.show(.progres
+            
         }
     }
     
@@ -139,5 +180,14 @@ extension ThirdViewController {
         showMessage(title: "Ошибка")
     }
     
-    
+    @objc fileprivate func gotVideo(_ notification: Notification) {
+        currVideos.append(contentsOf: DataManager.instance.feedVideos)
+        feedTableView.reloadData()
+        HUD.hide()
+    }
+        
+    @objc fileprivate func didFailGetVideo (_ notification: Notification) {
+        HUD.hide()
+        showMessage(title: "Произошла ошибка")
+    }
 }

@@ -250,38 +250,19 @@ class VideoViewController: UIView {
     var desc: String?
     
     
-    var isLiked = true
-    
     lazy var likeButton : UIButton = {
         let button = UIButton(type: .system)
         var image = UIImage()
-        if self.isLiked {
-            image = UIImage(named: "like")!
-            button.tintColor = UIColor(red: 0.98, green: 0.15, blue: 0.3, alpha: 1)
-        } else {
-            image = UIImage(named: "no_like")!
-            button.tintColor = .black
-        }
+        image = UIImage(named: "no_like")!
+        //button.tintColor = .black
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
+        button.isEnabled = false
         return button
     }()
     
     
-    func handleLike (sender : UIButton) {
-        print ("olololo")
-        var image = UIImage()
-        if isLiked {
-            image = UIImage(named: "no_like")!
-            likeButton.tintColor = .black
-        } else {
-            image = UIImage(named: "like")!
-            likeButton.tintColor = UIColor(red: 0.98, green: 0.15, blue: 0.3, alpha: 1)
-        }
-        likeButton.setImage(image, for: .normal)
-        isLiked = !isLiked
-    }
+
     
     let titleLabel : UILabel = {
         let label = UILabel()

@@ -16,6 +16,7 @@ class DataManager {
     private let logoutUrl = "https://api.vid.me/auth/delete"
     private let getFeaturedUrl = "https://api.vid.me/videos/featured"
     private let getNewUrl = "https://api.vid.me/videos/new"
+    private let getFeedUrl = "https://api.vid.me/videos/feed"
     
     private init() {}
     static let instance = DataManager()
@@ -24,6 +25,35 @@ class DataManager {
     private(set) var currentUser: User?
     private(set) var currentVideos: [Video] = []
     private(set) var featuredVideos: [Video] = []
+    private(set) var feedVideos: [Video] = []
+    
+    func getFeed(token: String) {
+        let params: [String : Any] = ["AccessToken" : token, "limit" : 100]
+        
+        Alamofire.request(getFeedUrl, method: .get, parameters: params).responseJSON { response in
+            let result = JSON(response.result.value as Any)
+            let videosJson = result["videos"].arrayValue
+            
+            if let statusField = result["status"].bool, statusField == true {
+                
+                var tmpVideos: [Video] = []
+                
+                for jsonVideo in videosJson {
+                    
+                    
+                    if let video = Video(json: jsonVideo) {
+                        tmpVideos.append(video)
+                    }
+                    
+                }
+                self.feedVideos.append(contentsOf: tmpVideos)
+                
+                NotificationCenter.default.post(name: .GotVideo, object: nil)
+            } else {
+                NotificationCenter.default.post(name: .DidFailGetVideo, object: nil)
+            }
+        }
+    }
     
     
     func getVideo (amount: Int) {
