@@ -17,7 +17,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     @IBOutlet weak var feedTableView: UITableView!
     @IBOutlet weak var loginStack: UIStackView!
     @IBOutlet weak var logoutButton: UIButton!
-    var urlArray:[String] = ["https://d1wst0behutosd.cloudfront.net/thumbnails/14818578.jpg?v1r1491791023", "https://d1wst0behutosd.cloudfront.net/thumbnails/14861286.jpg?v1r1491945878"]
+
     var refresher: UIRefreshControl!
     
     
@@ -85,8 +85,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
         refresher.endRefreshing()
         
     }
- 
-
 }
 
 extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
@@ -107,10 +105,6 @@ extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
             cell.nameLabel.text = currVideos[indexPath.row].title
             
         }
-        
-        /*if indexPath.row == currVideos.count - 2 {
-            loadMore()
-        }*/
         
         return cell
     }
@@ -157,8 +151,6 @@ extension ThirdViewController {
             self.view.endEditing(true)
             
             DataManager.instance.getFeed(token: user.token)
-            //HUD.show(.progres
-            
         }
     }
     

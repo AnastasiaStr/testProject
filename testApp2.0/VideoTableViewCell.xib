@@ -80,6 +80,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="no_like" width="16" height="16"/>
+        <image name="no_like" width="64" height="64"/>
     </resources>
 </document>

@@ -2,7 +2,7 @@
 //  Video.swift
 //  testApp2.0
 //
-//  Created by Alexander Kravchenko on 13.04.17.
+//  Created by Anastasia on 13.04.17.
 //  Copyright © 2017 Anastasia. All rights reserved.
 //
 
