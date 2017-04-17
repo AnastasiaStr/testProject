@@ -108,11 +108,8 @@ class VideoPlayerView : UIView {
             player?.play()
         }
         
-        
-        
         isPlaying = !isPlaying
     
-        
     }
     
     let controlsContainerView: UIView = {

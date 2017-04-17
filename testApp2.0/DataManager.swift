@@ -38,6 +38,7 @@ class DataManager {
                 var tmpVideos: [Video] = []
                 
                 for jsonVideo in videosJson {
+                    
                 
                     if let video = Video(json: jsonVideo) {
                         tmpVideos.append(video)
