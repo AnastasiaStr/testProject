@@ -26,8 +26,10 @@ class VideoPlayerView : UIView {
     }()
     
     func handleClose (sender : UIButton) {
-        player?.replaceCurrentItem(with: nil)
         function()
+        player?.replaceCurrentItem(with: nil)
+        UIApplication.shared.isStatusBarHidden = false
+
     }
     
     let activityIndicatorView : UIActivityIndicatorView = {
@@ -302,6 +304,8 @@ class VideoViewController: UIView {
             self.view.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 10, width: 10, height: 10)
 
         }, completion: { (completedAnimation) in
+            self.likeButton.removeFromSuperview()
+            self.likesCountLabel.removeFromSuperview()
             self.view.removeFromSuperview()
             self.removeFromSuperview()
         })
