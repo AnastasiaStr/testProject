@@ -300,12 +300,13 @@ class VideoViewController: UIView {
     
     func deleteScreen () {
         if let keyWindow = UIApplication.shared.keyWindow {
+            self.likeButton.removeFromSuperview()
+            self.likesCountLabel.removeFromSuperview()
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
             self.view.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 10, width: 10, height: 10)
 
         }, completion: { (completedAnimation) in
-            self.likeButton.removeFromSuperview()
-            self.likesCountLabel.removeFromSuperview()
+
             self.view.removeFromSuperview()
             self.removeFromSuperview()
         })
