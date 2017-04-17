@@ -150,7 +150,6 @@ extension ThirdViewController: UITableViewDelegate, UITableViewDataSource {
 extension ThirdViewController {
     
     @objc fileprivate func gotUser(_ notification: Notification) {
-        HUD.hide()
         if let user = DataManager.instance.currentUser {
             loginStack.isHidden = true
             logoutButton.isHidden = false
@@ -182,7 +181,7 @@ extension ThirdViewController {
     }
     
     @objc fileprivate func gotVideo(_ notification: Notification) {
-        currVideos.append(contentsOf: DataManager.instance.currentVideos)
+        currVideos.append(contentsOf: DataManager.instance.feedVideos)
         feedTableView.reloadData()
         HUD.hide()
     }

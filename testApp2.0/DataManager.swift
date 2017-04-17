@@ -28,7 +28,7 @@ class DataManager {
     private(set) var feedVideos: [Video] = []
     
     func getFeed(token: String) {
-        let params: [String : Any] = ["AccessToken" : token, "limit" : 10]
+        let params: [String : Any] = ["AccessToken" : token, "limit" : 100]
         
         Alamofire.request(getFeedUrl, method: .get, parameters: params).responseJSON { response in
             let result = JSON(response.result.value as Any)
