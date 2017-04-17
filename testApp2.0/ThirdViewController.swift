@@ -66,7 +66,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     
     @IBAction func myLoginButton(_ sender: Any) {
        if let username = myUsername.text, let password = myPassword.text {
-            HUD.show(.progress)
+            HUD.showProgress()
             DataManager.instance.login(login: username, password: password)
         
         }
@@ -74,7 +74,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate, Alertable {
     }
     
     @IBAction func pressLogoutButton(_ sender: Any) {
-        HUD.show(.progress)
+        HUD.showProgress()
         DataManager.instance.logout()
     }
     

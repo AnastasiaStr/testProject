@@ -28,6 +28,12 @@ class DataManager {
     private(set) var feedVideos: [Video] = []
     
     func getFeed(token: String) {
+        
+        guard Utils.isInternetAvailable else {
+            NotificationCenter.default.post(name: .NoInternetConnection, object: nil)
+            return
+        }
+        
         let params: [String : Any] = ["AccessToken" : token, "limit" : 100]
         
         Alamofire.request(getFeedUrl, method: .get, parameters: params).responseJSON { response in
