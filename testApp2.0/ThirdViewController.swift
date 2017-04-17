@@ -164,8 +164,7 @@ extension ThirdViewController {
     
     @objc fileprivate func didFailGetUser(_ notification: Notification) {
         HUD.hide()
-        //Я тут потом допишу разные ошибки при логине
-        showMessage(title: nil, message: "Ошибка")
+        showMessage(title: nil, message: "Incorrect login or password")
     }
     
     @objc fileprivate func logoutComplete(_ notification: Notification) {
@@ -177,7 +176,7 @@ extension ThirdViewController {
     
     @objc fileprivate func didFailCompleteLogout(_ notification: Notification) {
         HUD.hide()
-        showMessage(title: "Ошибка")
+        showMessage(title: "Mistake")
     }
     
     @objc fileprivate func gotVideo(_ notification: Notification) {
@@ -188,6 +187,6 @@ extension ThirdViewController {
         
     @objc fileprivate func didFailGetVideo (_ notification: Notification) {
         HUD.hide()
-        showMessage(title: "Произошла ошибка")
+        showMessage(title: "Mistake")
     }
 }

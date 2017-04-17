@@ -18,12 +18,9 @@ class VideoTableViewCell: UITableViewCell, NibLoadableView, ReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        likeButton.isEnabled = false
         
     }
-    
-    @IBAction func likeButton(_ sender: Any) {
-    }
-    
 
 
 }

@@ -130,7 +130,7 @@ extension FeaturedViewController {
     
     @objc fileprivate func didFailGetVideos (_ notification: Notification) {
         HUD.hide()
-        showMessage(title: "Произошла ошибка")
+        showMessage(title: "Mistake")
     }
     
 }

@@ -123,7 +123,7 @@ extension SecondViewController {
     
     @objc fileprivate func didFailGetVideo (_ notification: Notification) {
         HUD.hide()
-        showMessage(title: "Произошла ошибка")
+        showMessage(title: "Mistake")
     }
 
 }

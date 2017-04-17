@@ -49,15 +49,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc private func internetNotAvailable(_ notification: Notification) {
         if let topVC = UIApplication.topViewController() {
-            let title = "Нет соединения с интернетом"
-            let message = "Убедитесь, что устройство подключено к Интернету."
+            let title = "No internet connection"
+            let message = "Please, make sure youк device is connected to the Internet"
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alert.addAction(cancelAction)
             topVC.present(alert, animated: true, completion: nil)
         }
     }
-
-
 }
 

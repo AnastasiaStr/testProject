@@ -86,8 +86,6 @@ class VideoPlayerView : UIView {
     
     lazy var pausePlayButton : UIButton = {
         let button = UIButton(type: .system)
-        //let image = UIImage(named: "pause")
-        //button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
         button.isHidden = true
@@ -254,8 +252,8 @@ class VideoViewController: UIView {
         let button = UIButton(type: .system)
         var image = UIImage()
         image = UIImage(named: "no_like")!
-        //button.tintColor = .black
         button.setImage(image, for: .normal)
+        button.tintColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isEnabled = false
         return button
@@ -287,16 +285,14 @@ class VideoViewController: UIView {
         return label
     }()
     
-    let descLabel : UILabel = {
-        let label = UILabel()
+    let descText : UITextView = {
+        let label = UITextView()
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
-        label.numberOfLines = 0
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.00001
+        label.isEditable = false
         return label
     }()
     
@@ -310,7 +306,6 @@ class VideoViewController: UIView {
             self.removeFromSuperview()
         })
   
-        print ("keklol")
         }
     }
     
@@ -321,7 +316,6 @@ class VideoViewController: UIView {
         if let keyWindow = UIApplication.shared.keyWindow {
             view = UIView(frame: keyWindow.frame)
             view.backgroundColor = UIColor.white
-            print ("azaza")
             
             view.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 60, width: 10, height: 10)
             
@@ -333,11 +327,11 @@ class VideoViewController: UIView {
             
             titleLabel.text = title
             view.addSubview(titleLabel)
-            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive = true
             titleLabel.topAnchor.constraint(equalTo: videoPlayerView.bottomAnchor, constant: 13).isActive = true
             titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -100).isActive = true
 
-            titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
             likesCountLabel.text = String(likes)
             view.addSubview(likesCountLabel)
@@ -347,12 +341,12 @@ class VideoViewController: UIView {
             
             likesCountLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
             
-            descLabel.text = desc
-            view.addSubview(descLabel)
-            descLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
-            descLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
-            descLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
-            descLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8).isActive = true
+            descText.text = desc
+            view.addSubview(descText)
+            descText.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
+            descText.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+            descText.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
+            descText.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8).isActive = true
             
             view.addSubview(likeButton)
             likeButton.rightAnchor.constraint(equalTo: likesCountLabel.leftAnchor, constant: -8).isActive = true
@@ -369,6 +363,4 @@ class VideoViewController: UIView {
             })
         }
     }
-    
-
 }

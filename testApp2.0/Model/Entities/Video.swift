@@ -22,7 +22,6 @@ struct Video {
 
 extension Video {
     init?(json: JSON) {
-        print (json["video_id"].string)
         guard let videoId = json["video_id"].string,
             let url = json["complete_url"].string,
             let title = json["title"].string,

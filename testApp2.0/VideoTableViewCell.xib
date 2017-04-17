@@ -43,9 +43,6 @@
                                     <constraint firstAttribute="height" constant="25" id="bRj-oT-mUb"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="no_like"/>
-                                <connections>
-                                    <action selector="likeButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Blc-V4-HJm"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="likes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRc-ue-UhM">
                                 <rect key="frame" x="33" y="0.0" width="60.5" height="25"/>
@@ -83,6 +80,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="no_like" width="64" height="64"/>
+        <image name="no_like" width="16" height="16"/>
     </resources>
 </document>
