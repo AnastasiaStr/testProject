@@ -19,14 +19,6 @@ class VideoTableViewCell: UITableViewCell, NibLoadableView, ReusableView {
         super.awakeFromNib()
         selectionStyle = .none
         
-        /*if ThirdViewController.userExists {
-            likeButton.setImage(UIImage(named: "no_like"), for: .normal)
-            likeButton.tintColor = .black
-        } else {
-            likeButton.setImage(UIImage(named: "like"), for: .normal)
-            likeButton.tintColor = UIColor(red: 0.87, green: 87, blue: 87, alpha: 1)
-
-        }*/
     }
     
     @IBAction func likeButton(_ sender: Any) {

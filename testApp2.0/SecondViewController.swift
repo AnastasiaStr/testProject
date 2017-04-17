@@ -71,7 +71,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell: VideoTableViewCell = tableView.dequeueReusableCell(for: indexPath)
     
         if let url = URL(string: currVideos[indexPath.row].thumbnailUrl){
-            cell.myImage?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image2"))
+            cell.myImage?.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "placeholder_image"))
             let likes = currVideos[indexPath.row].likesCount
             cell.likesLabel.text = String(likes)
             cell.nameLabel.text = currVideos[indexPath.row].title
